@@ -86,6 +86,7 @@ class DATA4307f92b371f4d918b0d30be75048ef4 extends \app\models\Nixxis\Data {
             'RETOUR_JOURPRELEVEMENT', 'RETOUR_DATEIMPORT', 'TEL3', 'A_MOISPA', 'A_JOURPA'], 'string'],
             [['MODIF_TEL', 'MODIF_ADRESSE', 'MODIF_EMAIL'], 'integer'],
             [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
+            [['TEL1', 'TEL2'], 'app\components\NixxisPhoneNumberValidator', 'format' => 'FR'],
             [['N_MONTANT'], 'double', 'message' => 'La valeur doit être un montant valide'],
             [['N_MONTANT', 'N_PERIODICITE'], 'required', 'on' => 'AUGPA', 'message' => 'Ce champs ne peut être vide'],
             [['N_MONTANT'], 'required', 'on' => 'DSM', 'message' => 'Ce champs ne peut être vide'],
