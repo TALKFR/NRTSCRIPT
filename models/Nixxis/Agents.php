@@ -36,7 +36,7 @@ class Agents extends \yii\db\ActiveRecord {
      * @inheritdoc
      */
     public static function tableName() {
-        return 'agents';
+        return 'admin.dbo.agents';
     }
 
     /**

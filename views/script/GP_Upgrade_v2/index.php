@@ -56,10 +56,19 @@ $this->title = 'Nixxis Reporting & Tools';
                         'message' => "La fiche a déjà été qualifiée le " . $model->GetSystemData()->GetLastHandlingTimeFormatted() . ' par ' .
                         $model->GetSystemData()->GetLastHandlerName() . '<br> avec la qualification : ' . $model->GetSystemData()->GetLastQualificationName()]) : ''
             ?>
-            <?=
-            $model->scenario != 'RO' ?
-                    QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'datas' => $NixxisQualifications, 'model' => $model]) :
-                    QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'qualificationid' => $Script['IncomingQualificationError'], 'datas' => $NixxisQualifications, 'model' => $model])
+
+            <?php
+            if (isset($Script['IncomingQualificationError']) && $Script['IncomingQualificationError'] != '' && $NixxisParameters->ActivityType == $NixxisParameters::ACT_INBOUND && $model->scenario == 'RO') {
+                echo QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'qualificationid' => $Script['IncomingQualificationError'], 'datas' => $NixxisQualifications, 'model' => $model]);
+            } else {
+                echo QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'datas' => $NixxisQualifications, 'model' => $model]);
+            }
+
+//            if (isset($Script['IncomingQualificationError']) && $Script['IncomingQualificationError'] != '') {
+//                echo $model->scenario != 'RO' ?
+//                        QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'datas' => $NixxisQualifications, 'model' => $model]) :
+//                        QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'qualificationid' => $Script['IncomingQualificationError'], 'datas' => $NixxisQualifications, 'model' => $model]);
+//            }
             ?>
             <div class="row" style=" margin-left: 0px; margin-right: 0px;">
                 <?= $form->field($model, 'COMMENTAIRE_APPEL')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>

@@ -36,7 +36,7 @@ class Qualifications extends \yii\db\ActiveRecord {
      * @inheritdoc
      */
     public static function tableName() {
-        return 'qualifications';
+        return 'admin.dbo.qualifications';
     }
 
     /**

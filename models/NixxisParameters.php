@@ -6,6 +6,7 @@ use yii\base\Model;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
+use app\models\Nixxis\InboundActivities;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,6 +16,9 @@ use libphonenumber\PhoneNumberUtil;
 
 class NixxisParameters extends Model {
 
+    const ACT_OUTBOUND = 0;
+    const ACT_INBOUND = 1;
+
     public $diallerCampaign;
     public $diallerActivity;
     public $contactid;
@@ -22,6 +26,7 @@ class NixxisParameters extends Model {
     public $autosearch;
     public $sessionid;
     public $validatedPhoneNumber;
+    public $ActivityType;
 
     public function rules() {
         return [
@@ -56,6 +61,16 @@ class NixxisParameters extends Model {
             return $this->validatedPhoneNumber;
         } catch (NumberParseException $ex) {
             return null;
+        }
+    }
+
+    public function GetNixxisActivityType() {
+        $Activity = InboundActivities::find()->where("id='" . $this->diallerActivity . "'")->one();
+
+        if ($Activity instanceof InboundActivities) {
+            $this->ActivityType = self::ACT_INBOUND;
+        } else {
+            $this->ActivityType = self::ACT_OUTBOUND;
         }
     }
 

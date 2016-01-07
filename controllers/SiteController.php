@@ -11,6 +11,10 @@ use app\models\NixxisAffectations;
 use app\components\NixxisV2;
 use app\components\NrtLogger;
 
+//http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign={9}&diallerActivity={2}&contactid={1}&diallerReference={6}&autosearch={3}&sessionid={8}
+// http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=4307f92b371f4d918b0d30be75048ef4&diallerActivity=f03aca45b54241259a62041b676fdb8a&contactid=1234&diallerReference=1d1525c4c96e4763a2fe2e5c0d7ccfc7&autosearch=&sessionid=0000c3ea93f144dabd2c421acdd00532
+
+
 class SiteController extends Controller {
 
     public function behaviors() {
@@ -99,6 +103,8 @@ class SiteController extends Controller {
                 echo htmlentities((print_r($NixxisAffectations->errors, true)));
                 die(htmlentities("Erreur dans le paramètrage de l'affectation"));
             }
+            $NixxisParameters->GetNixxisActivityType();
+
 
             Yii::$app->session->set('NixxisParameters', $NixxisParameters);
             Yii::$app->session->set('NixxisQualifications', $this->GetQualification($NixxisParameters->diallerActivity));
