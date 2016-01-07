@@ -29,6 +29,7 @@ class NixxisQualifications extends Model {
 //            ['callbackPhone', 'safe'],
             [['callbackDate', 'callbackTime'], 'required', 'on' => 'CALLBACK', 'message' => 'Ce champs ne peut être vide'],
             ['callbackPhone', 'app\components\NixxisPhoneNumberValidator', 'format' => 'FR'],
+            ['callbackTime', 'app\components\NixxisCallbackTimeValidator', 'Min' => '09:15', 'Max' => '19:45'],
         ];
     }
 

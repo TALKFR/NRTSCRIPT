@@ -16,6 +16,7 @@ $config = [
                     'baseUrl' => '@web',
                     'js' => [
                         'js/jquery-1.11.3.js',
+//                        'js/jquery-1.9.0.js',
                     ]
                 ],
 //                'yii\bootstrap\BootstrapAsset' => [

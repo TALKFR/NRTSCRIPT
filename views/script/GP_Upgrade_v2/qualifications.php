@@ -25,28 +25,33 @@ use kartik\time\TimePicker;
     <?php
     // CODE POUR LIMITER LA PLAGE HORAIRE DU RAPPEL ENTRE 9h30 ET 19H30
     $this->registerJs("
-    $(\"#nixxisqualifications-callbacktime\").on('changeTime.timepicker', function (e) {
-
-        var hours = e.time.hours;
-        var minutes = e.time.minutes;
-
-        if (hours > 19) {
-            $(this).timepicker('setTime', '9:15');
-        }
-
-        if (hours < 9) {
-            $(this).timepicker('setTime', '19:30');
-        }
-
-        if (hours == 9 && minutes < 15) {
-            $(this).timepicker('setTime', '19:30');
-        }
-
-        if (hours == 19 && minutes > 30) {
-            $(this).timepicker('setTime', '9:15');
-        }
-
-    });             
+//    $(\"#nixxisqualifications-callbacktime\").on('changeTime.timepicker', function (e) {
+//
+//        var hours = e.time.hours;
+//        var minutes = e.time.minutes;
+//
+//        
+//        if (hours > 19) {
+//            $(\"#nixxisqualifications-callbacktime\").timepicker('setTime', '9:15');
+//            //$(this).timepicker('setTime', '9:15');
+//        }
+//
+//        if (hours < 9) {
+//            $(\"#nixxisqualifications-callbacktime\").timepicker('setTime', '19:30');
+//            //$(this).timepicker('setTime', '19:30');
+//        }
+//
+//        if (hours == 9 && minutes < 15) {
+//            $(\"#nixxisqualifications-callbacktime\").timepicker('setTime', '19:30');
+//            //$(this).timepicker('setTime', '19:30');
+//        }
+//
+//        if (hours == 19 && minutes > 30) {
+//            //$(\"#nixxisqualifications-callbacktime\").timepicker('setTime', '9:15');
+//            //$(this).timepicker('setTime', '9:15');
+//        }
+//
+//    });             
 ", $this::POS_READY);
 
 
@@ -68,28 +73,13 @@ use kartik\time\TimePicker;
     ?>
     <div class="row">
         <div class="col-sm-2" >
-            <div class="row" style="text-align: center;">
-                <span style="color: red;"><b>APPEL SORTANT</b> </span>
-            </div>
-            <div class="row" style="background-color: #113060; color: #ffffff; font-size: 10px;">
-                <span style="text-decoration: underline;"><b>Numéro membre :</b> </span>
-                <br><?= $model->IDENTIFIANT1 ?>
-                <br>
-                <span style="text-decoration: underline;"><b>Code média :</b> </span>
-                <br><?= $model->CODE_MEDIA ?>    
-                <br>
-                <span style="text-decoration: underline;"><b>Montant dernier PA :</b> </span>
-                <br><?= $model->A_MONTANT ?>     
-                <br>
-                <span style="text-decoration: underline;"><b>Cycle actuel :</b> </span>
-                <br><?= $model->GetTextCycle($model->A_PERIODICITE) ?>    
-                <br>
-                <span style="text-decoration: underline;"><b>Mois dernier PA :</b> </span>
-                <br><?= $model->A_MOISPA ?>   
-                <br>
-                <span style="text-decoration: underline;"><b>Jour dernier PA :</b> </span>
-                <br><?= $model->A_JOURPA ?>                  
-            </div>
+            <?=
+            $this->render('common_info', [
+                'form' => $form,
+                'model' => $model,
+                'NixxisParameters' => $NixxisParameters,
+            ])
+            ?>   
         </div>
 
         <div class="col-sm-10">
@@ -141,6 +131,11 @@ use kartik\time\TimePicker;
                                     'autoclose' => true,
                                     'format' => 'dd-mm-yyyy',
                                     'todayHighlight' => true
+                                ],
+                                'pluginEvents' => [
+                                    "show" => "function(e) {   console.log('ii'); }",
+                                    "hide" => "function(e) {   console.log('mm'); }",
+                                    "update" => "function(e) {  console.log('hh'); }",
                                 ]
                             ]);
                             echo Html::error($model_qualifications, 'callback_date');
@@ -150,15 +145,14 @@ use kartik\time\TimePicker;
 
                         </div>
                         <div class="col-sm-6">
-                            <?=
-                            $form->field($model_qualifications, 'callbackTime')->widget(TimePicker::classname(), [
-                                'name' => 'callback_time',
+                            <?php
+                            echo $form->field($model_qualifications, 'callbackTime')->widget(TimePicker::classname(), [
                                 'readonly' => true,
                                 'pluginOptions' => [
                                     'showSeconds' => false,
                                     'showMeridian' => false,
                                 ]
-                            ])->label('Heure du rappel (entre 9h15 et 19h30)');
+                            ])->label('Heure du rappel (entre 9h15 et 19h45)');
                             ?>
                         </div>
 
