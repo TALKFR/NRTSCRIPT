@@ -132,11 +132,6 @@ use kartik\time\TimePicker;
                                     'format' => 'dd-mm-yyyy',
                                     'todayHighlight' => true
                                 ],
-                                'pluginEvents' => [
-                                    "show" => "function(e) {   console.log('ii'); }",
-                                    "hide" => "function(e) {   console.log('mm'); }",
-                                    "update" => "function(e) {  console.log('hh'); }",
-                                ]
                             ]);
                             echo Html::error($model_qualifications, 'callback_date');
 
