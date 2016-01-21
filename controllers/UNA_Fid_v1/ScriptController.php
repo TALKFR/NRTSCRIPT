@@ -6,7 +6,6 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
-use yii\data\ActiveDataProvider;
 use app\models\NixxisParameters;
 use app\models\NixxisQualifications;
 use app\components\NrtLogger;
@@ -43,7 +42,6 @@ class ScriptController extends Controller {
         $NixxisParameters->diallerReference = $id;
         Yii::$app->session->set('NixxisParameters', $NixxisParameters);
 
-//return $this->redirect(array($Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/script/' . 'index', 'nocache' => uniqid(), 'sessionid' => Yii::$app->session->id), 302);
         return $this->redirect(array($Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/script/' . 'index'), 302);
     }
 
@@ -102,7 +100,6 @@ class ScriptController extends Controller {
                 break;
 
             case '9ba6ba9b2b9a498a97829d051119af44': // DS
-//                $model->scenario = 'DS';
                 break;
             case 'ff36d463b2d34ecb947c058cdc46be02': // DSM
                 $model->scenario = 'DSM/DSM EN LIGNE';
@@ -138,7 +135,7 @@ class ScriptController extends Controller {
                         'NixxisQualifications' => $this->NixxisQualifications,
             ]);
         } else {
-            NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptGoto");
+            NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "Goto Model validate error");
             return $this->render('UNA_Fid_v' . $Script['Version'] . '/index', [
                         'model' => $model,
                         'model_qualifications' => $model_qualifications,
@@ -163,7 +160,6 @@ class ScriptController extends Controller {
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($model_qualifications->load(Yii::$app->request->post()) && $model_qualifications->validate()) {
-                //$this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
                 NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptQualify");
                 return $this->render('last', [
                             'model' => $model,
@@ -172,8 +168,7 @@ class ScriptController extends Controller {
                             'NixxisQualifications' => $model_qualifications,
                 ]);
             } else {
-                //$this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
-                NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "Model Qualification validate error");
+                NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "Qualify Model Qualification validate error");
                 return $this->render('UNA_Fid_v' . $Script['Version'] . '/qualifications', [
                             'model' => $model,
                             'model_qualifications' => $model_qualifications,
@@ -183,10 +178,7 @@ class ScriptController extends Controller {
                 ]);
             }
         } else {
-//            print_r($model->getErrors());
-//            die("can't save model ");
-            //$this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
-            NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "Model validate error");
+            NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "Qualify Model validate error");
             return $this->render('UNA_Fid_v' . $Script['Version'] . '/qualifications', [
                         'model' => $model,
                         'model_qualifications' => $model_qualifications,
