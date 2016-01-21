@@ -46,7 +46,7 @@ use kartik\time\TimePicker;
 
         <div class="col-sm-10">
             <?php
-            echo $model->scenario;
+//            echo $model->scenario;
 //            $form = ActiveForm::begin(['id' => 'qualify-form', 'action' => ['site/update', 'Internal__Id__' => $model->Internal__Id__]]);
             ?>
 
