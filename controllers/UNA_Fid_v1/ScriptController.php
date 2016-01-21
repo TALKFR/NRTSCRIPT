@@ -5,12 +5,13 @@ namespace app\controllers\UNA_Fid_v1;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use \yii\web\Response;
 use yii\data\ActiveDataProvider;
 use app\models\NixxisParameters;
 use app\models\NixxisQualifications;
 use app\components\NrtLogger;
 
-/* @var $model \app\models\Campaigns\DATA4307f92b371f4d918b0d30be75048ef4 */
+/* @var $model \app\models\Campaigns\DATA76b3ff146f6c4802b727bb3042493043 */
 
 class ScriptController extends Controller {
 
@@ -83,15 +84,21 @@ class ScriptController extends Controller {
     }
 
     private function AffectScenario($NixxisQualificationId, &$model, &$model_qualifications) {
+        /* @var $model \app\models\Campaigns\DATA76b3ff146f6c4802b727bb3042493043 */
+
         switch ($NixxisQualificationId) {
             case '52118127c7b6409da7d3adda64573fb5': //PA
+                $model->N_DATEPA_DAY = '01';
+                $model->N_DATEPA_YEAR = Date('Y');
                 $model->scenario = 'PA';
                 break;
             case '63085e8fb23a4c5aaf2e409c0696c4a3' ://PAM
-                $model->scenario = 'PAM/PAM SLIMPAY';
+                $model->N_DATEPA_DAY = '01';
+                $model->N_DATEPA_YEAR = Date('Y');
+                $model->scenario = 'PAM';
                 break;
             case '3d3f3024cde74f9fa1c5ee7fbf7c18f5' ://PAM SLIMPAY
-                $model->scenario = 'PAM/PAM SLIMPAY';
+                $model->scenario = 'PAM SLIMPAY';
                 break;
 
             case '9ba6ba9b2b9a498a97829d051119af44': // DS
@@ -106,21 +113,6 @@ class ScriptController extends Controller {
             case '11e09f316e4c49a3ae406a65a0b80cdf': // A RAPPLER
                 $model_qualifications->scenario = 'CALLBACK';
                 break;
-
-
-//            case 'f888544daee64f44af2fde31233740a0':
-//                $model->N_DATEPA = $model->GetProchainPA();
-//                $model->scenario = 'AUGPA';
-//                break;
-//            case '4d784672223947488055251ae149d5d1':
-//                $model->scenario = 'DSM';
-//                break;
-//            case '469eba39d8984e308e6aec841cb3752a':
-//                $model->scenario = 'DSM';
-//                break;
-//            case '81f38eb61c444a36ae6f90fe478291ca':
-//                $model_qualifications->scenario = 'CALLBACK';
-//                break;
         }
     }
 
@@ -190,6 +182,7 @@ class ScriptController extends Controller {
         } else {
 //            print_r($model->getErrors());
 //            die("can't save model ");
+            $this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
             return $this->render('UNA_Fid_v' . $Script['Version'] . '/qualifications', [
                         'model' => $model,
                         'model_qualifications' => $model_qualifications,
@@ -198,6 +191,14 @@ class ScriptController extends Controller {
                         'NixxisQualifications' => $this->NixxisQualifications,
             ]);
         }
+    }
+
+    public function actionGetProchainpa($day) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $data_month = \app\models\Campaigns\DATA76b3ff146f6c4802b727bb3042493043::GetMonthProchainPA($day);
+        $daya_year = \app\models\Campaigns\DATA76b3ff146f6c4802b727bb3042493043::GetYearProchainPA($day);
+
+        return array('month' => $data_month, 'year' => $daya_year);
     }
 
     protected function findModel($id) {
