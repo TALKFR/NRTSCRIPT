@@ -23,16 +23,10 @@ use kartik\time\TimePicker;
 <div class="site-index">
 
     <?php
-// print_r($NixxisParameters);
-//    echo $NixxisParameters->contactid;
-//    exit(0);
     $form = ActiveForm::begin(['id' => 'qualify-form',
                 'action' => [$Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/script/qualify', 'Internal__id__' => $model->Internal__id__]]);
     ?>
     <?php
-//    print_r($NixxisQualifications);
-//    exit(0);
-    // echo $model_qualifications->qualificationId;
 //    echo 'DialerCampaign   : ' . $NixxisParameters->diallerCampaign . '<br>';
 //    echo 'Contactid        : ' . $NixxisParameters->contactid . '<br>';
 //    echo 'DiallerReference : ' . $NixxisParameters->diallerReference . '<br>';
@@ -52,6 +46,7 @@ use kartik\time\TimePicker;
 
         <div class="col-sm-10">
             <?php
+            echo $model->scenario;
 //            $form = ActiveForm::begin(['id' => 'qualify-form', 'action' => ['site/update', 'Internal__Id__' => $model->Internal__Id__]]);
             ?>
 
@@ -70,16 +65,91 @@ use kartik\time\TimePicker;
             ])
             ?>              <?php
             $NixxisQualification = $NixxisQualifications[$model_qualifications->qualificationId];
-//            if (isset($NixxisQualifications_P[$model_qualifications->qualificationId])) {
-//                $NixxisQualification = $NixxisQualifications_P[$model_qualifications->qualificationId];
-//            } elseif (isset($NixxisQualifications_I[$model_qualifications->qualificationId])) {
-//                $NixxisQualification = $NixxisQualifications_I[$model_qualifications->qualificationId];
-//            } else {
-////                echo 'null';
-//                $NixxisQualification = null;
-//            }
-            switch ($NixxisQualification['Id']) {
-                case '11e09f316e4c49a3ae406a65a0b80cdf' : // RAPPEL
+
+            switch ($model->scenario) {
+                case 'PAM':
+                    echo'
+                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
+                        <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D\'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
+                    </div>
+                    <div class = "row" >
+                    <div class = "col-sm-12">';
+                    echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant du Prélévement');
+
+                    echo $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle');
+                    //echo $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain Prélévement');
+                    echo '<label class="control-label" for=rown_datepa">Date du prochain prélévement</label>';
+                    echo '<div id="rown_datepa" class = "row" >';
+                    echo '<div class = "col-sm-3" > ' . $form->field($model, 'N_DATEPA_MONTH')->dropDownList($model::getMonths(), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Mois') . '</div>';
+                    echo '<div class = "col-sm-3" > ' . $form->field($model, 'N_DATEPA_YEAR')->dropDownList($model::getYears(), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Année') . '</div>';
+                    //echo $model::GetMonthProchainPA();
+                    echo '</div>';
+                    echo '</div> 
+                    </div>';
+                    break;
+                case 'PAM SLIMPAY':
+                    echo'
+                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
+                        <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D\'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
+                    </div>
+                    <div class = "row" >
+                    <div class = "col-sm-12">';
+                    echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant du Prélévement');
+
+                    echo $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle');
+                    //echo $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain Prélévement');
+                    echo '<label class="control-label" for=rown_datepa">Date du prochain prélévement</label>';
+                    echo '<div id="rown_datepa" class = "row" >';
+                    echo '<div class = "col-sm-3" > ' . $form->field($model, 'N_DATEPA_DAY')->dropDownList(['05' => '05', '15' => '15', '25' => '25'], ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Jour') . '</div>';
+                    echo '<div class = "col-sm-3" > ' . $form->field($model, 'N_DATEPA_MONTH')->dropDownList($model::getMonths(), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Mois') . '</div>';
+                    echo '<div class = "col-sm-3" > ' . $form->field($model, 'N_DATEPA_YEAR')->dropDownList($model::getYears(), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Année') . '</div>';
+                    //echo $model::GetMonthProchainPA();
+                    echo '</div>';
+                    echo '</div> 
+                    </div>';
+                    break;
+                case 'PA':
+                    echo'
+                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
+                        <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D\'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
+                    </div>
+                    <div class = "row" >
+                    <div class = "col-sm-12">';
+                    echo '<label class="control-label" for=rown_datepa">Date du prochain prélévement</label>';
+                    echo '<div id="rown_datepa" class = "row" >';
+                    echo '<div class = "col-sm-3" > ' . $form->field($model, 'N_DATEPA_MONTH')->dropDownList($model::getMonths(), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Mois') . '</div>';
+                    echo '<div class = "col-sm-3" > ' . $form->field($model, 'N_DATEPA_YEAR')->dropDownList($model::getYears(), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Année') . '</div>';
+                    //echo $model::GetMonthProchainPA();
+                    echo '</div>';
+                    echo '</div> 
+                    </div>';
+                    break;
+                case 'DSM/DSM EN LIGNE':
+                    echo'
+                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
+                        <div class="col-sm-12" style="text-align: center;"><h5><b>DON SIMPLE AVEC MONTANT</b></h5></div>
+                    </div>
+                    <div class = "row" >
+                    <div class = "col-sm-12">';
+                    echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant du don');
+                    echo '</div> 
+                    </div>';
+                    break;
+
+                default :
+                    echo'
+                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
+                        <div class="col-sm-12" style="text-align: center;"><h5><b>' . $NixxisQualification['Description'] . '</b></h5></div>
+                    </div>
+                    <div class = "row" >
+                    <div class = "col-sm-12">';
+                    echo '</div> 
+                    </div>';
+                    break;
+            }
+
+            switch ($model_qualifications->scenario) {
+                case 'CALLBACK' : // RAPPEL
                     ?>
                     <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
                         <div class="col-sm-12" style="text-align: center;"><h5><b>EFFECTUER UN RAPPEL</b></h5></div>
@@ -128,95 +198,12 @@ use kartik\time\TimePicker;
                     </div>            
                     <?php
                     break;
-                case '63085e8fb23a4c5aaf2e409c0696c4a3': // PAM
-                    ?>
-                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
-                        <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
-                    </div> 
-
-                    <div class="row" >
-                        <div class="col-sm-12">
-                            <?= $form->field($model, 'N_MONTANT')->textInput()->label('Montant du Prélévement') ?>
-                            <?= $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle') ?>
-                            <?= $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain Prélévement') ?>                    
-                        </div>
-                    </div>                         
-                    <?php
-                    break;
-                case '3d3f3024cde74f9fa1c5ee7fbf7c18f5': // PAM SLIMPAY
-                    ?>
-                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
-                        <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
-                    </div> 
-
-                    <div class="row" >
-                        <div class="col-sm-12">
-                            <?= $form->field($model, 'N_MONTANT')->textInput()->label('Montant du Prélévement') ?>
-                            <?= $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle') ?>
-                            <?= $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain Prélévement') ?>                    
-                        </div>
-                    </div>                         
-                    <?php
-                    break;
-                case '52118127c7b6409da7d3adda64573fb5': // PA
-                    ?>
-                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
-                        <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
-                    </div> 
-
-                    <div class="row" >
-                        <div class="col-sm-12">
-                            <?= $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain Prélévement') ?>                    
-                        </div>
-                    </div>                         
-                    <?php
-                    break;
-                case '9ba6ba9b2b9a498a97829d051119af44': // DS
-                    ?>
-                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
-                        <div class="col-sm-12" style="text-align: center;"><h5><b>DON SIMPLE SANS MONTANT</b></h5></div>
-                    </div> 
-
-
-
-                    <?php
-                    break;
-                case 'ff36d463b2d34ecb947c058cdc46be02': // DSM
-                    ?>
-                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
-                        <div class="col-sm-12" style="text-align: center;"><h5><b>DON SIMPLE AVEC MONTANT</b></h5></div>
-                    </div> 
-
-                    <div class="row" >
-                        <div class="col-sm-12">
-                            <?= $form->field($model, 'N_MONTANT')->textInput()->label('Montant du don') ?>            
-                        </div>
-                    </div> 
-
-                    <?php
-                    break;
-                case 'b71c97f6792d4da1bb5e98f6fae3f37d': // DSM EN LIGNE
-                    ?>
-                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
-                        <div class="col-sm-12" style="text-align: center;"><h5><b>DON SIMPLE AVEC MONTANT EN LIGNE</b></h5></div>
-                    </div> 
-
-                    <div class="row" >
-                        <div class="col-sm-12">
-                            <?= $form->field($model, 'N_MONTANT')->textInput()->label('Montant du don') ?>
-
-                        </div>
-                    </div> 
-
-                <?php
             }
             ?>
             <div class="row" style = "margin-top: 5px;">
                 <div class="col-sm-12">
                     <?php
                     echo '<p style="text-align:center">';
-
-//echo Html::a($NixxisQualification_P['Description'], ['qualify', 'id' => $model->Internal__Id__, 'buttonid' => $NixxisQualification_P['Id']], ['class' => 'btn btn-success', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ', 'data' => ['method' => 'post']]);
                     ?>
                     <?=
                     Html::submitButton($NixxisQualification['Description'], ['class' => 'btn btn-success', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ',
@@ -239,7 +226,6 @@ use kartik\time\TimePicker;
 
                     <?php
                     echo '<p style="text-align:center">';
-//$NixxisQualification_P = $NixxisQualifications_P[$buttonid];
                     echo Html::a('Retour', ['index', 'id' => $model->Internal__id__, 'buttonid' => $NixxisQualification['Id']], ['class' => 'btn btn-danger', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ']);
                     echo '</p>';
                     ?>
@@ -249,12 +235,28 @@ use kartik\time\TimePicker;
             <?php ActiveForm::end(); ?> 
         </div>
     </div>
-
-
-
-
-
-
-
-
 </div>
+<?php
+$myAjaxJs = <<<JS
+    $('#data76b3ff146f6c4802b727bb3042493043-n_datepa_day').change(function() {
+        $.ajax({
+            url: 'index.php?r=UNA_Fid_v1/script/get-prochainpa&day=' + this.value,
+            dataType: "json",
+            success: function (data) {
+                if (data.error) {
+                    alert(data.error);
+                } else if (data.month) {
+                    $("#data76b3ff146f6c4802b727bb3042493043-n_datepa_month").val(data.month);
+                    $("#data76b3ff146f6c4802b727bb3042493043-n_datepa_year").val(data.year);
+                } else {
+                    alert("Response in invalid format!");
+                }
+            }              
+        });
+    });
+
+          
+
+JS;
+$this->registerJs($myAjaxJs);
+?>

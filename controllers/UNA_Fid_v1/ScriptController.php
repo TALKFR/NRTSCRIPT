@@ -102,7 +102,7 @@ class ScriptController extends Controller {
                 break;
 
             case '9ba6ba9b2b9a498a97829d051119af44': // DS
-                $model->scenario = 'DS';
+//                $model->scenario = 'DS';
                 break;
             case 'ff36d463b2d34ecb947c058cdc46be02': // DSM
                 $model->scenario = 'DSM/DSM EN LIGNE';
@@ -159,8 +159,11 @@ class ScriptController extends Controller {
         $this->NixxisQualifications = Yii::$app->session->get('NixxisQualifications');
 
         $NixxisParameters = Yii::$app->session->get('NixxisParameters');
+        $this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($model_qualifications->load(Yii::$app->request->post()) && $model_qualifications->validate()) {
+                //$this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
                 NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptQualify");
                 return $this->render('last', [
                             'model' => $model,
@@ -169,8 +172,8 @@ class ScriptController extends Controller {
                             'NixxisQualifications' => $model_qualifications,
                 ]);
             } else {
-                $this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
-                NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptQualify");
+                //$this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
+                NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "Model Qualification validate error");
                 return $this->render('UNA_Fid_v' . $Script['Version'] . '/qualifications', [
                             'model' => $model,
                             'model_qualifications' => $model_qualifications,
@@ -182,7 +185,8 @@ class ScriptController extends Controller {
         } else {
 //            print_r($model->getErrors());
 //            die("can't save model ");
-            $this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
+            //$this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
+            NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "Model validate error");
             return $this->render('UNA_Fid_v' . $Script['Version'] . '/qualifications', [
                         'model' => $model,
                         'model_qualifications' => $model_qualifications,

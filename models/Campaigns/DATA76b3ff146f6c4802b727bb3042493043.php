@@ -59,6 +59,10 @@ use Yii;
  */
 class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
 
+    public $N_DATEPA_DAY;
+    public $N_DATEPA_MONTH;
+    public $N_DATEPA_YEAR;
+
     /**
      * @inheritdoc
      */
@@ -81,12 +85,16 @@ class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
             [['Internal__id__'], 'required'],
             [['Internal__id__', 'N_MONTANT', 'CODE_MEDIA', 'TEL1', 'RETOUR_PREMIERPRELEVEMENT', 'ADR1', 'RETOUR_PROMESSE', 'N_DATEPA', 'COMMENTAIRE_APPEL', 'RETOUR_DATEIMPORT', 'RETOUR_NOMFICHIER', 'RETOUR_IDSCAN', 'A_JOURPA', 'RETOUR_DATESIGNATURE', 'PRIORITE', 'RETOUR_COUPON', 'PRENOM', 'ADR2', 'A_MONTANT', 'RETOUR_DATESAISIE', 'IDENTIFIANT2', 'CP', 'IDENTIFIANT1', 'RETOUR_CATHEORIQUE', 'DATE_DE_NAISSANCE', 'RETOUR_FLAG', 'FILTRE', 'EMAIL2', 'RETOUR_JOURPRELEVEMENT', 'A_PERIODICITE', 'EMAIL1', 'A_MOISPA', 'VILLE', 'NOM', 'N_PERIODICITE', 'A_DATEPA', 'RETOUR_DATEDENVOI', 'RETOUR_PERIODICITE', 'TEL2', 'ADR4', 'ADR3', 'TEL3', 'COMMENTAIRE_DONATEUR', 'RETOUR_MONTANT', 'CIV', 'A_DATEDS'], 'string'],
             [['MODIF_EMAIL', 'MODIF_ADRESSE', 'MODIF_TEL'], 'integer'],
+            [['N_DATEPA_DAY', 'N_DATEPA_MONTH', 'N_DATEPA_YEAR'], 'safe'],
             [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
             [['TEL1', 'TEL2'], 'app\components\NixxisPhoneNumberValidator', 'format' => 'FR'],
             [['N_MONTANT'], 'double', 'message' => 'La valeur doit être un montant valide'],
-            [['N_MONTANT', 'N_PERIODICITE', 'N_DATEPA'], 'required', 'on' => 'PAM/PAM SLIMPAY', 'message' => 'Ce champs ne peut être vide'],
-            [['N_DATEPA'], 'required', 'on' => 'PA', 'message' => 'Ce champs ne peut être vide'],
+            [['N_MONTANT', 'N_PERIODICITE', 'N_DATEPA_DAY', 'N_DATEPA_MONTH', 'N_DATEPA_YEAR', 'N_DATEPA'], 'required', 'on' => 'PAM SLIMPAY', 'message' => 'Ce champs ne peut être vide'],
+            [['N_MONTANT', 'N_PERIODICITE', 'N_DATEPA_DAY', 'N_DATEPA_MONTH', 'N_DATEPA_YEAR', 'N_DATEPA'], 'required', 'on' => 'PAM', 'message' => 'Ce champs ne peut être vide'],
+            [['N_DATEPA'], 'safe', 'on' => 'PA'],
             [['N_MONTANT'], 'required', 'on' => 'DSM/DSM EN LIGNE', 'message' => 'Ce champs ne peut être vide'],
+            [['N_DATEPA'], 'app\components\IntervalValidator', 'on' => 'PAM SLIMPAY'],
+            ['N_MONTANT', 'compare', 'compareValue' => 0, 'operator' => '>', 'message' => 'Le montant doit être supérieur à 0'],
         ];
     }
 
@@ -147,6 +155,13 @@ class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
         ];
     }
 
+    public function beforeValidate() {
+        parent::beforeValidate();
+        $this->N_DATEPA = $this->N_DATEPA_DAY . '/' . $this->N_DATEPA_MONTH . '/' . $this->N_DATEPA_YEAR;
+
+        return true;
+    }
+
     public static function GetFormulaireCycles() {
 
         return array(
@@ -155,6 +170,54 @@ class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
             ['id' => 'Semestrielle', 'name' => 'Tous les 6 mois'],
             ['id' => 'Annuelle', 'name' => 'Tous les ans'],
         );
+    }
+
+    /**
+     * 
+     * @param type $day
+     * @return \DateTime
+     */
+    public static function GetMonthProchainPA($day) {
+        $datedujour = new \DateTime(Date('Y-m-d'));
+        //$datedujour = new \DateTime('2016-12-01');
+        for ($i = 0; $i < 3; $i++) {
+            $tmp = clone $datedujour;
+            $d = $tmp->format('d');
+            $m = $tmp->format('m');
+            $Y = $tmp->format('Y');
+            $tmp->setDate($Y, $m, $day);
+            $datenpa = $tmp->add(new \DateInterval('P' . $i . 'M'));
+            $diff = ($datenpa < $datedujour) ? -1 * ($datenpa->diff($datedujour)->format("%a")) : $datenpa->diff($datedujour)->format("%a");
+            if ($diff > 10) {
+                break;
+            }
+        }
+        //echo $datenpa->format('Y-m-d');
+        return $datenpa->format('m');
+    }
+
+    /**
+     * 
+     * @param type $day
+     * @return \DateTime
+     */
+    public static function GetYearProchainPA($day) {
+        $datedujour = new \DateTime(Date('Y-m-d'));
+        //$datedujour = new \DateTime('2016-12-01');
+        for ($i = 0; $i < 3; $i++) {
+            $tmp = clone $datedujour;
+            $d = $tmp->format('d');
+            $m = $tmp->format('m');
+            $Y = $tmp->format('Y');
+            $tmp->setDate($Y, $m, $day);
+            $datenpa = $tmp->add(new \DateInterval('P' . $i . 'M'));
+            $diff = ($datenpa < $datedujour) ? -1 * ($datenpa->diff($datedujour)->format("%a")) : $datenpa->diff($datedujour)->format("%a");
+            if ($diff > 10) {
+                break;
+            }
+        }
+        //echo $datenpa->format('Y-m-d');
+        return $datenpa->format('Y');
     }
 
 }
