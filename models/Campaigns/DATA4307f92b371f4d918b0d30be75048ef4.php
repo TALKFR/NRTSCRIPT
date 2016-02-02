@@ -178,11 +178,11 @@ class DATA4307f92b371f4d918b0d30be75048ef4 extends \app\models\Nixxis\Data {
     public function GetProchainPA() {
         if (Date('d') < 10) {
             $date = Date('Y-m-') . $this->A_JOURPA;
-            $date = date("Y-m-d", strtotime("+1 month", strtotime($date . "-01")));
+            $date = date("d/m/Y", strtotime("+1 month", strtotime($date . "-01")));
             return $date;
         } else {
             $date = Date('Y-m-') . $this->A_JOURPA;
-            $date = date("Y-m-d", strtotime("+2 month", strtotime($date . "-01")));
+            $date = date("d/m/Y", strtotime("+2 month", strtotime($date . "-01")));
             return $date;
         }
     }

@@ -170,7 +170,7 @@ use kartik\time\TimePicker;
                         <div class="col-sm-12">
                             <?= $form->field($model, 'N_MONTANT')->textInput()->label('Nouveau montant') ?>
                             <?= $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle') ?>
-                            <?= $form->field($model, 'N_DATEPA')->textInput(['readonly' => true])->label('Date du prochain PA') ?>                    
+                            <?= $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain PA') ?>                    
                         </div>
                     </div>                         
                     <?php
