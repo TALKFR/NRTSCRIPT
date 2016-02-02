@@ -262,8 +262,14 @@ class ScriptController extends Controller {
                 ]);
             }
         } else {
-            print_r($model->getErrors());
-            die("can't save model ");
+            NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "Qualify Model validate error");
+            return $this->render('GP_Upgrade_v' . $Script['Version'] . '/qualifications', [
+                        'model' => $model,
+                        'model_qualifications' => $model_qualifications,
+                        'NixxisParameters' => $NixxisParameters,
+                        'Script' => $Script,
+                        'NixxisQualifications' => $this->NixxisQualifications,
+            ]);
         }
     }
 

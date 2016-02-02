@@ -164,6 +164,15 @@ class DATA4307f92b371f4d918b0d30be75048ef4 extends \app\models\Nixxis\Data {
         );
     }
 
+    public function beforeValidate() {
+        parent::beforeValidate();
+        if ((($this->N_MONTANT / $this->N_PERIODICITE) - ($this->A_MONTANT / $this->A_PERIODICITE)) <= 0) {
+            $this->addError('N_MONTANT', 'Augmentation négative ou nulle');
+            return false;
+        }
+        return true;
+    }
+
     public static function GetTextCycle($cycle) {
         $tmp = null;
         $cyclesPA = self::GetFormulaireCycles();
