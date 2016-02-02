@@ -14,10 +14,10 @@ $this->title = 'Nixxis Reporting & Tools';
     }
 </script>  
 <div class="site-index">
-    <?php
-    $form = ActiveForm::begin(['id' => 'qualify-form', 'enableClientValidation' => true,
-                'action' => [$Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/script/qualify', 'Internal__id__' => $model->Internal__id__]]);
-    ?>
+<?php
+$form = ActiveForm::begin(['id' => 'qualify-form', 'enableClientValidation' => true,
+            'action' => [$Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/script/qualify', 'Internal__id__' => $model->Internal__id__]]);
+?>
     <?php
 //    echo 'DialerCampaign   : ' . $NixxisParameters->diallerCampaign . '<br>';
 //    echo 'Contactid        : ' . $NixxisParameters->contactid . '<br>';
@@ -30,13 +30,13 @@ $this->title = 'Nixxis Reporting & Tools';
 
     <div class="row">
         <div class="col-sm-2" >
-            <?=
-            $this->render('common_info', [
-                'form' => $form,
-                'model' => $model,
-                'NixxisParameters' => $NixxisParameters,
-            ])
-            ?>   
+<?=
+$this->render('common_info', [
+    'form' => $form,
+    'model' => $model,
+    'NixxisParameters' => $NixxisParameters,
+])
+?>   
         </div>
 
         <div class="col-sm-10">
@@ -44,12 +44,12 @@ $this->title = 'Nixxis Reporting & Tools';
 
                 <div class="col-sm-12" style="text-align: center;"><h4>UNADEV FIDELISATION</h4></div>
             </div>
-            <?=
-            $this->render('common_identity', [
-                'form' => $form,
-                'model' => $model,
-            ])
-            ?>            
+<?=
+$this->render('common_identity', [
+    'form' => $form,
+    'model' => $model,
+])
+?>            
             <?=
             $model->scenario == 'RO' ?
                     ErrorMessageWidget::widget(['title' => "MESSAGE D'ERREUR",
@@ -71,15 +71,15 @@ $this->title = 'Nixxis Reporting & Tools';
 //            }
             ?>
             <div class="row" style=" margin-left: 0px; margin-right: 0px;">
-                <?= $form->field($model, 'COMMENTAIRE_APPEL')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>
+            <?= $form->field($model, 'COMMENTAIRE_APPEL')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>
             </div>
-            <?= $model->scenario != 'RO' ? QualificationsWidget::widget(['type' => QualificationsWidget::NEUTRES, 'datas' => $NixxisQualifications, 'model' => $model]) : '' ?>
+                <?= $model->scenario != 'RO' ? QualificationsWidget::widget(['type' => QualificationsWidget::NEUTRES, 'datas' => $NixxisQualifications, 'model' => $model]) : '' ?>
 
             <div class="row" style=" margin-left: 0px; margin-right: 0px;">
-                <?= $form->field($model, 'COMMENTAIRE_DONATEUR')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>
+<?= $form->field($model, 'COMMENTAIRE_DONATEUR')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>
             </div>
-            <?= $model->scenario != 'RO' ? QualificationsWidget::widget(['type' => QualificationsWidget::POSITIVES, 'datas' => $NixxisQualifications, 'model' => $model]) : '' ?>
+                <?= $model->scenario != 'RO' ? QualificationsWidget::widget(['type' => QualificationsWidget::POSITIVES, 'datas' => $NixxisQualifications, 'model' => $model]) : '' ?>
         </div>
     </div>
-    <?php ActiveForm::end(); ?>    
+<?php ActiveForm::end(); ?>    
 </div>

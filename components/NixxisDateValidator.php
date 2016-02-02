@@ -19,7 +19,7 @@ class NixxisDateValidator extends Validator {
     public function validateAttribute($model, $attribute) {
         $value = $model->$attribute;
 
-        if (!$this->isValidDateTimeString($value, 'd-m-Y', 'Europe/Paris')) {
+        if ((!$this->isValidDateTimeString($value, 'd/m/Y', 'Europe/Paris') && $value === '')) {
             $model->addError($attribute, $this->message);
         }
         //echo $value;
@@ -37,8 +37,10 @@ class NixxisDateValidator extends Validator {
 var dtRegex = new RegExp(/\b\d{1,2}[\/-]\d{1,2}[\/-]\d{4}\b/);
 return dtRegex.test(dtValue);
 }
+
         
-if (!ValidateDate(value)) {
+        
+if ((!ValidateDate(value) && value != '')) {
     messages.push($message);
 }
 JS;

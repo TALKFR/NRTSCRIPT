@@ -1,5 +1,7 @@
+<?php
 
-
+use yii\helpers\ArrayHelper;
+?>
 
 <div class="row">
     <div class="col-sm-2"  >
@@ -37,5 +39,13 @@
     <div class="col-sm-6">
         <?= $form->field($model, 'EMAIL1')->textInput(['readonly' => $model->scenario == 'RO' ? true : false])->label('Adresse Email') ?>
     </div>
-
 </div>    
+<div class="row">
+    <div class="col-sm-6">
+        <?= $form->field($model, 'DATE_DE_NAISSANCE')->textInput(['readonly' => $model->scenario == 'RO' ? true : false])->label('Date de naissance (JJ/MM/AAAA)') ?>
+    </div>
+    <div class="col-sm-6">
+        <?= $form->field($model, 'CHIENCHATS')->dropDownList(ArrayHelper::map($model::GetFormulaireChienChats(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Chien ou chat ?') ?>
+    </div>    
+
+</div>   

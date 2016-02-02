@@ -6,10 +6,10 @@
         <?= $form->field($model, 'CIV')->textInput(['readonly' => $model->scenario == 'RO' ? true : false])->label('Civilité') ?>
     </div>
     <div class="col-sm-5" >
-        <?= $form->field($model, 'NOM')->textInput(['readonly' => True])->label('Nom') ?>
+        <?= $form->field($model, 'NOM')->textInput(['readonly' => $model->scenario == 'RO' ? true : false])->label('Nom') ?>
     </div>
     <div class="col-sm-5" > 
-        <?= $form->field($model, 'PRENOM')->textInput(['readonly' => True])->label('Prénom') ?>
+        <?= $form->field($model, 'PRENOM')->textInput(['readonly' => $model->scenario == 'RO' ? true : false])->label('Prénom') ?>
     </div>
 </div>    
 <div class="row" >

@@ -56,6 +56,8 @@ use Yii;
  * @property string $RETOUR_MONTANT
  * @property string $CIV
  * @property string $A_DATEDS
+ * 
+ * @property string $CHIENCHATS
  */
 class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
 
@@ -67,7 +69,7 @@ class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
      * @inheritdoc
      */
     public static function tableName() {
-        return 'DATA_76b3ff146f6c4802b727bb3042493043';
+        return 'Data_76b3ff146f6c4802b727bb3042493043.dbo.Data';
     }
 
     /**
@@ -85,7 +87,7 @@ class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
             [['Internal__id__'], 'required'],
             [['Internal__id__', 'N_MONTANT', 'CODE_MEDIA', 'TEL1', 'RETOUR_PREMIERPRELEVEMENT', 'ADR1', 'RETOUR_PROMESSE', 'N_DATEPA', 'COMMENTAIRE_APPEL', 'RETOUR_DATEIMPORT', 'RETOUR_NOMFICHIER', 'RETOUR_IDSCAN', 'A_JOURPA', 'RETOUR_DATESIGNATURE', 'PRIORITE', 'RETOUR_COUPON', 'PRENOM', 'ADR2', 'A_MONTANT', 'RETOUR_DATESAISIE', 'IDENTIFIANT2', 'CP', 'IDENTIFIANT1', 'RETOUR_CATHEORIQUE', 'DATE_DE_NAISSANCE', 'RETOUR_FLAG', 'FILTRE', 'EMAIL2', 'RETOUR_JOURPRELEVEMENT', 'A_PERIODICITE', 'EMAIL1', 'A_MOISPA', 'VILLE', 'NOM', 'N_PERIODICITE', 'A_DATEPA', 'RETOUR_DATEDENVOI', 'RETOUR_PERIODICITE', 'TEL2', 'ADR4', 'ADR3', 'TEL3', 'COMMENTAIRE_DONATEUR', 'RETOUR_MONTANT', 'CIV', 'A_DATEDS'], 'string'],
             [['MODIF_EMAIL', 'MODIF_ADRESSE', 'MODIF_TEL'], 'integer'],
-            [['N_DATEPA_DAY', 'N_DATEPA_MONTH', 'N_DATEPA_YEAR'], 'safe'],
+            [['N_DATEPA_DAY', 'N_DATEPA_MONTH', 'N_DATEPA_YEAR', 'CHIENCHATS'], 'safe'],
             [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
             [['TEL1', 'TEL2'], 'app\components\NixxisPhoneNumberValidator', 'format' => 'FR'],
             [['N_MONTANT'], 'double', 'message' => 'La valeur doit être un montant valide'],
@@ -93,6 +95,7 @@ class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
             [['N_MONTANT', 'N_PERIODICITE',], 'required', 'on' => 'PAM', 'message' => 'Ce champs ne peut être vide'],
             [['N_DATEPA'], 'safe', 'on' => 'PA'],
             [['N_MONTANT'], 'required', 'on' => 'DSM/DSM EN LIGNE', 'message' => 'Ce champs ne peut être vide'],
+            [['DATE_DE_NAISSANCE'], 'app\components\NixxisDateValidator'],
             [['N_DATEPA'], 'app\components\IntervalValidator', 'on' => 'PAM SLIMPAY'],
             ['N_MONTANT', 'compare', 'compareValue' => 0, 'operator' => '>', 'message' => 'Le montant doit être supérieur à 0'],
         ];
@@ -152,12 +155,16 @@ class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
             'RETOUR_MONTANT' => 'Retour  Montant',
             'CIV' => 'Civ',
             'A_DATEDS' => 'A  Dateds',
+            'CHIENCHATS' => '',
         ];
     }
 
     public function beforeValidate() {
         parent::beforeValidate();
         $this->N_DATEPA = $this->N_DATEPA_DAY . '/' . $this->N_DATEPA_MONTH . '/' . $this->N_DATEPA_YEAR;
+        if ($this->N_DATEPA_MONTH == '' && $this->scenario != 'PAM SLIMPAY') {
+            $this->N_DATEPA = '';
+        }
 
         return true;
     }
@@ -169,6 +176,14 @@ class DATA76b3ff146f6c4802b727bb3042493043 extends \app\models\Nixxis\Data {
             ['id' => 'Trimestrielle', 'name' => 'Tous les 3 mois'],
             ['id' => 'Semestrielle', 'name' => 'Tous les 6 mois'],
             ['id' => 'Annuelle', 'name' => 'Tous les ans'],
+        );
+    }
+
+    public static function GetFormulaireChienChats() {
+        return array(
+            ['id' => 'CHIEN', 'name' => 'Chien'],
+            ['id' => 'CHAT', 'name' => 'Chat'],
+            ['id' => 'AUCUN', 'name' => 'Aucun'],
         );
     }
 

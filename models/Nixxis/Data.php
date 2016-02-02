@@ -17,7 +17,15 @@ class Data extends \yii\db\ActiveRecord {
 
     public function GetSystemData() {
         $ClassSystemData = new SystemData();
-        $ClassSystemData::$system_tablename = $this->tableName() . '.dbo.SystemData';
+        $reflector = new \ReflectionClass($this);
+        $bddname = str_replace('DATA', '', $reflector->getShortName());
+        $bddname = str_replace('_', '', $bddname);
+        $bddname = 'Data_' . $bddname;
+
+
+
+
+        $ClassSystemData::$system_tablename = $bddname . '.dbo.SystemData';
 //        $ClassSystemData::$system_tablename = 'dbo.SystemData';
 //
 //        $connection = Yii::$app->db;
