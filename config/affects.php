@@ -28,7 +28,7 @@ return [
             'Version' => 1,
             'ControllerDirectory' => 'UNA_Fid',
             'ControllerStart' => 'index',
-            'Activities' => ['4b7c2c39a1be4f5ba2c6d32ca068e3a9'],
+            'Activities' => ['4b7c2c39a1be4f5ba2c6d32ca068e3a9', '85e59850b5554d848f3154a99cc7b69a'],
         ],
         ['Name' => 'GREENPEACE UPGRADE',
             'Commentaire' => 'Appels entrants',
