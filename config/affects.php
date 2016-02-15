@@ -40,6 +40,13 @@ return [
             'SearchFilter' => ['code_media' => 'K12T18'],
             'IncomingQualificationError' => 'aad81f62934b418597e80ab8ebe361a7',
         ],
+        ['Name' => 'GREENPEACE LEADS CARITATIFS',
+            'Commentaire' => '',
+            'Version' => 1,
+            'ControllerDirectory' => 'GP_Leads',
+            'ControllerStart' => 'index',
+            'Activities' => ['ee4e2ad6a35f421fbfa196ad7dd9c91a'],
+        ],
     ],
 ];
 

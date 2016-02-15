@@ -15,6 +15,9 @@ use app\components\NrtLogger;
 // http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=4307f92b371f4d918b0d30be75048ef4&diallerActivity=f03aca45b54241259a62041b676fdb8a&contactid=1234&diallerReference=1d1525c4c96e4763a2fe2e5c0d7ccfc7&autosearch=&sessionid=0000c3ea93f144dabd2c421acdd00532
 // http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=76b3ff146f6c4802b727bb3042493043&diallerActivity=e64d913cf18742a383a943b9e609810f&contactid=1234&diallerReference=0000861aaf2245c6a672f98a1191fa65&autosearch=&sessionid=0000c3ea93f144dabd2c421acdd00532
 //http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=76b3ff146f6c4802b727bb3042493043&diallerActivity=4b7c2c39a1be4f5ba2c6d32ca068e3a9&contactid=2e20a07add8848ec8987e35d7a6273b1&diallerReference=03bb770806714670aaad2325972e779b&autosearch=&sessionid=9bc0673373c24415ad9940b338e759e3
+//http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=b4cc418c204949078266f7bdc68e83a3&diallerActivity=ee4e2ad6a35f421fbfa196ad7dd9c91a&contactid=2e20a07add8848ec8987e35d7a6273b1&diallerReference=0bdd2406909047b88b4b935f8458ec51&autosearch=&sessionid=9bc0673373c24415ad9940b338e759e3
+
+
 class SiteController extends Controller {
 
     public function behaviors() {
