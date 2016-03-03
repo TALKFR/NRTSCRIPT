@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\components\QualificationsWidget;
 use app\components\ErrorMessageWidget;
@@ -79,7 +80,21 @@ $this->title = 'Nixxis Reporting & Tools';
                 <?= $form->field($model, 'COMMENTAIRE_DONATEUR')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>
             </div>
             <?= $model->scenario != 'RO' ? QualificationsWidget::widget(['type' => QualificationsWidget::POSITIVES, 'datas' => $NixxisQualifications, 'model' => $model]) : '' ?>
+            <div class="row" style = "margin-top: 5px;">
+
+
+                <?php
+                echo '<p style="text-align:center">';
+                //$NixxisQualification_P = $NixxisQualifications_P[$buttonid];
+                echo Html::a('Retour', ['search'], ['class' => 'btn btn-danger', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ']);
+                echo '</p>';
+                ?>
+
+
+            </div>  
         </div>
+
     </div>
+
     <?php ActiveForm::end(); ?>    
 </div>

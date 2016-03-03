@@ -3,6 +3,7 @@
 namespace app\models\Campaigns;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "DATA_4307f92b371f4d918b0d30be75048ef4".
@@ -194,6 +195,29 @@ class DATA4307f92b371f4d918b0d30be75048ef4 extends \app\models\Nixxis\Data {
             $date = date("d/m/Y", strtotime("+2 month", strtotime($date . "-01")));
             return $date;
         }
+    }
+
+    public function search($params, $filtersearch) {
+        $query = $this::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        $query->andFilterWhere($filtersearch);
+
+        $query->andFilterWhere(['like', 'NOM', $this->NOM])
+                ->andFilterWhere(['like', 'PRENOM', $this->PRENOM])
+                ->andFilterWhere(['like', 'TEL1', $this->TEL1])
+                ->andFilterWhere(['like', 'TEL2', $this->TEL2])
+                ->andFilterWhere(['like', 'CP', $this->CP])
+                ->andFilterWhere(['like', 'VILLE', $this->VILLE])
+
+        ;
+
+        return $dataProvider;
     }
 
 }

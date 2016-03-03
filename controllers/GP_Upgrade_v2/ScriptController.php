@@ -132,7 +132,7 @@ class ScriptController extends Controller {
             ]);
         }
         $model = $modelclass::find()
-                ->where("tel_trouve = '" . $ValidatedPhoneNumber . "' OR tel3 = '" . $ValidatedPhoneNumber . "'")
+                ->where("TEL1 = '" . $ValidatedPhoneNumber . "' OR TEL2 = '" . $ValidatedPhoneNumber . "'")
                 ->one();
 
         if ($model instanceof $modelclass) {
