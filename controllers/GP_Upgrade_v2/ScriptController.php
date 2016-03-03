@@ -167,7 +167,9 @@ class ScriptController extends Controller {
         $this->NixxisQualifications = Yii::$app->session->get('NixxisQualifications');
 
         if ($model->GetSystemData()->LastQualification != '' && $NixxisParameters->ActivityType == $NixxisParameters::ACT_INBOUND) {
-            $model->scenario = 'RO';
+            if ($model->GetSystemData()->LastQualificationPositive == 1 || $model->GetSystemData()->LastQualificationPositive == -1) {
+                $model->scenario = 'RO';
+            }
         }
 
         NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptIndex");
