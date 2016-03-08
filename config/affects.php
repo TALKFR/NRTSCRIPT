@@ -35,7 +35,7 @@ return [
             'Version' => 1,
             'ControllerDirectory' => 'UNA_Fact',
             'ControllerStart' => 'index',
-            'Activities' => ['1eda085380844a56b3efe3f594d8e900'],
+            'Activities' => ['1eda085380844a56b3efe3f594d8e900', '7380d7e0a2454340b4a9dc380740c3c4'],
         ],
         ['Name' => 'GREENPEACE UPGRADE',
             'Commentaire' => 'Appels entrants',
