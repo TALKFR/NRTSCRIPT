@@ -52,7 +52,7 @@ return [
             'Version' => 1,
             'ControllerDirectory' => 'GP_Leads',
             'ControllerStart' => 'index',
-            'Activities' => ['ee4e2ad6a35f421fbfa196ad7dd9c91a'],
+            'Activities' => ['d1340400746448499870ebd8ac46faff'],
         ],
     ],
 ];
