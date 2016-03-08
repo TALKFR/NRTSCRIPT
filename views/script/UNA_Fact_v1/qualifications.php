@@ -131,8 +131,12 @@ use kartik\time\TimePicker;
                     </div>
                     <div class = "row" >
                     <div class = "col-sm-12">';
+
+                    echo '<div class = "col-sm-6" > ';
                     echo '<div id="rown_datepa" class = "row" >';
-                    echo '<div class = "col-sm-6" > ' . $form->field($model, '_PROMESSEENVOYEE')->dropDownList(ArrayHelper::map($model::GetFormulairePromesseEnvoyee(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Promesse') . '</div>';
+                    echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant de la promesse');
+                    echo $form->field($model, '_PROMESSEENVOYEE')->dropDownList(ArrayHelper::map($model::GetFormulairePromesseEnvoyee(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Promesse');
+                    echo '</div>';
                     //echo $model::GetMonthProchainPA();
                     echo '</div>';
                     echo '</div> 

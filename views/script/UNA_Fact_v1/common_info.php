@@ -11,6 +11,8 @@
     <span style="text-decoration: underline;"><b>Montant dernier DON :</b> </span>
     <br><?= $model->A_MONTANT ?>     
     <br>
-
+    <span style="text-decoration: underline;"><b>Date Marché :</b> </span>
+    <br><?= $model->_DATE_MARCHE ?>     
+    <br>
 </div>
 

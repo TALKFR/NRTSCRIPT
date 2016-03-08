@@ -59,6 +59,7 @@ use Yii;
  * @property string $ADR2
  * @property string $_REMARQUE
  * @property string $_PROMESSEENVOYEE
+ * @property string $_DATE_MARCHE
  */
 class DATA0e083f4fab3144b6813f7dd82a56bcf1 extends \app\models\Nixxis\Data {
 
@@ -96,7 +97,7 @@ class DATA0e083f4fab3144b6813f7dd82a56bcf1 extends \app\models\Nixxis\Data {
     public function rules() {
         return [
             [['Internal__id__'], 'required'],
-            [['Internal__id__', 'A_MONTANT', 'RETOUR_JOURPRELEVEMENT', 'CIV', 'ADR1', 'RETOUR_PERIODICITE', 'DATE_DE_NAISSANCE', 'RETOUR_CATHEORIQUE', 'IDENTIFIANT2', 'A_MOISPA', 'CODE_MEDIA', 'EMAIL1', 'VILLE', 'COMMENTAIRE_DONATEUR', 'RETOUR_PROMESSE', 'CHIENCHATS', 'RETOUR_IDSCAN', 'RETOUR_DATEDENVOI', 'RETOUR_FLAG', 'RETOUR_DATESIGNATURE', 'TEL2', 'A_DATEDS', 'PRENOM', 'N_PERIODICITE', 'COMMENTAIRE_APPEL', 'A_DATEPA', 'RETOUR_NOMFICHIER', 'RETOUR_MONTANT', 'ADR4', 'ADR3', 'RETOUR_COUPON', 'NOM', 'PRIORITE', 'TEL1', 'EMAIL2', 'RETOUR_PREMIERPRELEVEMENT', 'N_MONTANT', 'RETOUR_DATEIMPORT', 'A_JOURPA', 'FILTRE', 'RETOUR_DATESAISIE', 'A_PERIODICITE', 'IDENTIFIANT1', 'CP', 'TEL3', 'N_DATEPA', 'ADR2', '_REMARQUE', '_PROMESSEENVOYEE'], 'string'],
+            [['Internal__id__', 'A_MONTANT', 'RETOUR_JOURPRELEVEMENT', 'CIV', 'ADR1', 'RETOUR_PERIODICITE', 'DATE_DE_NAISSANCE', 'RETOUR_CATHEORIQUE', 'IDENTIFIANT2', 'A_MOISPA', 'CODE_MEDIA', 'EMAIL1', 'VILLE', 'COMMENTAIRE_DONATEUR', 'RETOUR_PROMESSE', 'CHIENCHATS', 'RETOUR_IDSCAN', 'RETOUR_DATEDENVOI', 'RETOUR_FLAG', 'RETOUR_DATESIGNATURE', 'TEL2', 'A_DATEDS', 'PRENOM', 'N_PERIODICITE', 'COMMENTAIRE_APPEL', 'A_DATEPA', 'RETOUR_NOMFICHIER', 'RETOUR_MONTANT', 'ADR4', 'ADR3', 'RETOUR_COUPON', 'NOM', 'PRIORITE', 'TEL1', 'EMAIL2', 'RETOUR_PREMIERPRELEVEMENT', 'N_MONTANT', 'RETOUR_DATEIMPORT', 'A_JOURPA', 'FILTRE', 'RETOUR_DATESAISIE', 'A_PERIODICITE', 'IDENTIFIANT1', 'CP', 'TEL3', 'N_DATEPA', 'ADR2', '_REMARQUE', '_PROMESSEENVOYEE', '_DATE_MARCHE'], 'string'],
             [['MODIF_ADRESSE', 'MODIF_EMAIL', 'MODIF_TEL'], 'integer'],
             [['N_DATEPA_DAY', 'N_DATEPA_MONTH', 'N_DATEPA_YEAR', 'CHIENCHATS'], 'safe'],
             [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
@@ -104,7 +105,7 @@ class DATA0e083f4fab3144b6813f7dd82a56bcf1 extends \app\models\Nixxis\Data {
             [['N_MONTANT'], 'double', 'message' => 'La valeur doit être un montant valide'],
             [['N_MONTANT', 'N_PERIODICITE', 'N_DATEPA_DAY', 'N_DATEPA_MONTH', 'N_DATEPA_YEAR', 'N_DATEPA'], 'required', 'on' => 'PAM SLIMPAY', 'message' => 'Ce champs ne peut être vide'],
             [['N_MONTANT', 'N_PERIODICITE',], 'required', 'on' => 'PAM', 'message' => 'Ce champs ne peut être vide'],
-            [['_PROMESSEENVOYEE'], 'required', 'on' => 'ENVOYE', 'message' => 'Ce champs ne peut être vide'],
+            [['_PROMESSEENVOYEE', 'N_MONTANT'], 'required', 'on' => 'ENVOYE', 'message' => 'Ce champs ne peut être vide'],
             [['N_MONTANT'], 'required', 'on' => 'DSM/DSM EN LIGNE', 'message' => 'Ce champs ne peut être vide'],
             [['DATE_DE_NAISSANCE'], 'app\components\NixxisDateValidator'],
             [['N_DATEPA'], 'app\components\IntervalValidator', 'on' => 'PAM SLIMPAY'],
