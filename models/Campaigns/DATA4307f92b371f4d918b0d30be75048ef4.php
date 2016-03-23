@@ -5,6 +5,10 @@ namespace app\models\Campaigns;
 use Yii;
 use yii\data\ActiveDataProvider;
 
+/*
+ * GP UPGRADE
+ */
+
 /**
  * This is the model class for table "DATA_4307f92b371f4d918b0d30be75048ef4".
  *

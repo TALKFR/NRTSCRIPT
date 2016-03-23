@@ -54,6 +54,13 @@ return [
             'ControllerStart' => 'index',
             'Activities' => ['d1340400746448499870ebd8ac46faff'],
         ],
+        ['Name' => 'CHAINE DE L\'ESPOIR UPGRADE',
+            'Commentaire' => '',
+            'Version' => 1,
+            'ControllerDirectory' => 'CHAINE_Upgrade',
+            'ControllerStart' => 'index',
+            'Activities' => ['dc58c49f46fc4fa4a36f0eb1b8f4fe09', 'c003376af5fa4c078cc2e9d401c227da'],
+        ],
     ],
 ];
 

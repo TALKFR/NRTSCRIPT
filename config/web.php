@@ -41,21 +41,42 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
+//        'mailer' => [
+//            'class' => 'yii\swiftmailer\Mailer',
+//            // send all mails to a file by default. You have to set
+//            // 'useFileTransport' to false and configure a transport
+//            // for the mailer to send real emails.
+//            'useFileTransport' => true,
+//        ],
+        'mail' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'viewPath' => '@app/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.mandrillapp.com',
+//                'username' => 'gpouilly@softattitude.fr',
+//                'password' => 'LgaRL2411GP6GTCeC9jqxw',
+//                'port' => '587',
+//                'encryption' => 'tls',
+                'host' => '10.100.30.6',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'flushInterval' => 1,
             'targets' => [
+//                [
+//                    'class' => 'yii\log\FileTarget',
+//                    'categories' => ['yii\swiftmailer\Logger::add'],
+//                    'levels' => ['info', 'error'],
+//                    'exportInterval' => 1,
+//                ],
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                    'logVars' => ['_SESSION'],
+                    'levels' => ['info', 'error', 'warning'],
+                    //'logVars' => ['_SESSION'],
+                    'logVars' => [],
                     'exportInterval' => 1,
                 ],
                 [

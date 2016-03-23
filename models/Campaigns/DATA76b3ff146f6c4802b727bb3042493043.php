@@ -4,6 +4,10 @@ namespace app\models\Campaigns;
 
 use Yii;
 
+/*
+ * UNADEV
+ */
+
 /**
  * This is the model class for table "DATA_76b3ff146f6c4802b727bb3042493043".
  *
