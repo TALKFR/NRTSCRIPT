@@ -57,7 +57,7 @@ use app\components\iRaiserPayment;
 
             <div class="row" style="background-color: #113060; color: #ffffff; height: 39px; margin-left: 0px; margin-right: 0px;">
 
-                <div class="col-sm-12" style="text-align: center;"><h4>CHAINE DE L'ESPOIR UPGRADE</h4></div>
+                <div class="col-sm-12" style="text-align: center;"><h4>CHAINE DE L'ESPOIR REACTIVATION</h4></div>
             </div>
             <?=
             $this->render('common_identity', [
@@ -68,83 +68,7 @@ use app\components\iRaiserPayment;
             $NixxisQualification = $NixxisQualifications[$model_qualifications->qualificationId];
 
             switch ($model->scenario) {
-                case 'AUGPAM':
-                    echo'
-                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
-                        <div class="col-sm-12" style="text-align: center;"><h5><b>AUGMENTATION D\'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
-                    </div>
-                    <div class = "row" >
-                    <div class = "col-sm-12">';
-                    echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant du Prélévement');
-
-                    echo $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle');
-                    //echo $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain Prélévement');
-
-
-                    echo DatePicker::widget([
-                        'language' => 'fr',
-                        'model' => $model,
-                        'form' => $form,
-                        'name' => 'N_DATEPA',
-                        'readonly' => true,
-                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-                        'attribute' => 'N_DATEPA',
-                        'pluginOptions' => [
-                            'autoclose' => true,
-                            'format' => 'dd/mm/yyyy',
-                            'todayHighlight' => true
-                        ],
-                    ]);
-                    echo Html::error($model_qualifications, 'callback_date');
-
-                    echo Html::error($model, 'callback_date');
-
-                    echo '</div> 
-                    </div>';
-                    break;
-                case 'AUGPAMEMAIL':
-                    echo'
-                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
-                        <div class="col-sm-12" style="text-align: center;"><h5><b>AUGMENTATION D\'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
-                    </div>
-                    <div class = "row" >
-                    <div class = "col-sm-12">';
-
-                    if (count($model_qualifications->availableemails)) {
-                        echo $form->field($model_qualifications, 'email')->dropDownList(ArrayHelper::map($model_qualifications->getAvailableEmails(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Adresse Email à utiliser');
-                    }
-
-
-
-                    echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant du Prélévement');
-
-                    echo $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle');
-                    //echo $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain Prélévement');
-
-
-                    echo DatePicker::widget([
-                        'language' => 'fr',
-                        'model' => $model,
-                        'form' => $form,
-                        'name' => 'N_DATEPA',
-                        'readonly' => true,
-                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-                        'attribute' => 'N_DATEPA',
-                        'pluginOptions' => [
-                            'autoclose' => true,
-                            'format' => 'dd/mm/yyyy',
-                            'todayHighlight' => true
-                        ],
-                    ]);
-                    echo Html::error($model_qualifications, 'callback_date');
-
-                    echo Html::error($model, 'callback_date');
-
-                    echo '</div> 
-                    </div>';
-                    break;
-
-                case 'PAM SLIMPAY':
+                case 'PAM':
                     echo'
                     <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
                         <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D\'UN PRELEVEMENT AUTOMATIQUE</b></h5></div>
@@ -155,11 +79,123 @@ use app\components\iRaiserPayment;
 
                     echo $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle');
                     //echo $form->field($model, 'N_DATEPA')->textInput()->label('Date du prochain Prélévement');
-                    echo '<label class="control-label" for=rown_datepa">Date du prochain prélévement</label>';
-                    echo '<div id="rown_datepa" class = "row" >';
 
-                    //echo $model::GetMonthProchainPA();
+
+                    echo DatePicker::widget([
+                        'language' => 'fr',
+                        'model' => $model,
+                        'form' => $form,
+                        'name' => 'N_DATEPA',
+                        'readonly' => true,
+                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                        'attribute' => 'N_DATEPA',
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd/mm/yyyy',
+                            'todayHighlight' => true
+                        ],
+                    ]);
+                    echo Html::error($model_qualifications, 'callback_date');
+
+                    echo Html::error($model, 'callback_date');
+
+                    echo '</div> 
+                    </div>';
+                    break;
+                case 'PAMENLIGNE':
+                    echo'
+                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
+                        <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D\'UN PRELEVEMENT AUTOMATIQUE PAR CB</b></h5></div>
+                    </div>
+                    <div class = "row" >
+                    <div class = "col-sm-12">';
+                    $iRaiserPayment = new iRaiserPayment();
+                    $iRaiserPayment->setBase_url('https://donner.chainedelespoir.org');
+                    $iRaiserPayment->setCid('18');
+                    $iRaiserPayment->setFrequency('regular');
+                    //echo $iRaiserPayment->GetUrl($model);
+                    //echo '<a href="' . $iRaiserPayment->GetUrl($model) . '" target="_blank">Cliquez ici pour effectuer le paiement en ligne</a>';
+                    echo '                  
+  <script type="text/javascript">
+  function openURL()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("' . $iRaiserPayment->GetUrl($model) . '");
+          
+  }
+  </script>';
+                    echo ' <div class="row" style="text-align:center;">';
+                    echo ' <input type="button" onclick="openURL()" value="Cliquez ici pour effectuer le prélévement en ligne">';
                     echo '</div>';
+                    echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant du Prélévement');
+                    echo $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle');
+                    echo DatePicker::widget([
+                        'language' => 'fr',
+                        'model' => $model,
+                        'form' => $form,
+                        'name' => 'N_DATEPA',
+                        'readonly' => true,
+                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                        'attribute' => 'N_DATEPA',
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd/mm/yyyy',
+                            'todayHighlight' => true
+                        ],
+                    ]);
+                    echo Html::error($model_qualifications, 'callback_date');
+
+                    echo Html::error($model, 'callback_date');
+
+                    echo '</div> 
+                    </div>';
+                    break;
+
+                case 'PAMSLIMPAY':
+                    echo'
+                    <div class="row" style="background-color: #113060; color: #ffffff; height: 29px; margin-left: 0px; margin-right: 0px; margin-top: 5px;">
+                        <div class="col-sm-12" style="text-align: center;"><h5><b>CREATION D\'UN PRELEVEMENT AUTOMATIQUE SLIMPAY</b></h5></div>
+                    </div>
+                    <div class = "row" >
+                    <div class = "col-sm-12">';
+                    $iRaiserPayment = new iRaiserPayment();
+                    $iRaiserPayment->setBase_url('https://donner.chainedelespoir.org');
+                    $iRaiserPayment->setCid('18');
+                    $iRaiserPayment->setFrequency('regular');
+                    //echo $iRaiserPayment->GetUrl($model);
+                    //echo '<a href="' . $iRaiserPayment->GetUrl($model) . '" target="_blank">Cliquez ici pour effectuer le paiement en ligne</a>';
+                    echo '                  
+  <script type="text/javascript">
+  function openURL()
+  {
+      var shell = new ActiveXObject("WScript.Shell");
+      shell.run("' . $iRaiserPayment->GetUrl($model) . '");
+          
+  }
+  </script>';
+                    echo ' <div class="row" style="text-align:center;">';
+                    echo ' <input type="button" onclick="openURL()" value="Cliquez ici pour effectuer le prélévement en ligne">';
+                    echo '</div>';
+                    echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant du Prélévement');
+                    echo $form->field($model, 'N_PERIODICITE')->dropDownList(ArrayHelper::map($model::GetFormulaireCycles(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Nouveau cycle');
+                    echo DatePicker::widget([
+                        'language' => 'fr',
+                        'model' => $model,
+                        'form' => $form,
+                        'name' => 'N_DATEPA',
+                        'readonly' => true,
+                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                        'attribute' => 'N_DATEPA',
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd/mm/yyyy',
+                            'todayHighlight' => true
+                        ],
+                    ]);
+                    echo Html::error($model_qualifications, 'callback_date');
+
+                    echo Html::error($model, 'callback_date');
+
                     echo '</div> 
                     </div>';
                     break;

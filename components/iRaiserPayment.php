@@ -9,6 +9,7 @@ class iRaiserPayment {
 
     private $base_url;
     private $cid;
+    private $frequency;
 
     function setBase_url($base_url) {
         $this->base_url = $base_url;
@@ -16,6 +17,10 @@ class iRaiserPayment {
 
     function setCid($cid) {
         $this->cid = $cid;
+    }
+
+    function setFrequency($frequency) {
+        $this->frequency = $frequency;
     }
 
     public function GetUrl($model) {
@@ -31,7 +36,7 @@ class iRaiserPayment {
         $base_url .= trim('postcode=' . $model->CP) . '&';
         $base_url .= trim('city=' . $model->VILLE) . '&';
         $base_url .= 'country=FR&';
-        $base_url .= 'frequency=once&';
+        $base_url .= 'frequency=' . $this->frequency . '&';
         $base_url .= trim('amount=' . ($model->N_MONTANT * 100)) . '&';
         $base_url .= 'free_amount=1&';
         $base_url .= trim('reserved_field=' . $model->CODE_MEDIA) . '&';

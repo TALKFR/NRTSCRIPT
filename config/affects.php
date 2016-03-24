@@ -61,6 +61,13 @@ return [
             'ControllerStart' => 'index',
             'Activities' => ['dc58c49f46fc4fa4a36f0eb1b8f4fe09', 'c003376af5fa4c078cc2e9d401c227da'],
         ],
+        ['Name' => 'CHAINE DE L\'ESPOIR REACT',
+            'Commentaire' => '',
+            'Version' => 1,
+            'ControllerDirectory' => 'CHAINE_React',
+            'ControllerStart' => 'index',
+            'Activities' => ['8b65ba21a32141ef820096efe40407a9', '20d684f4f62644699f41aaebefcab7fa'],
+        ],
     ],
 ];
 
