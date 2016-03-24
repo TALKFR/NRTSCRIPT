@@ -32,119 +32,6 @@ class ScriptController extends Controller {
         ];
     }
 
-    public function actionSelect($id) {
-        $NixxisParameters = Yii::$app->session->get('NixxisParameters');
-        $Script = Yii::$app->session->get('Script');
-
-        if (!$NixxisParameters instanceof NixxisParameters) {
-            die('Session Error');
-        }
-
-        $NixxisParameters->diallerReference = $id;
-        Yii::$app->session->set('NixxisParameters', $NixxisParameters);
-
-//return $this->redirect(array($Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/script/' . 'index', 'nocache' => uniqid(), 'sessionid' => Yii::$app->session->id), 302);
-        return $this->redirect(array($Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/script/' . 'index'), 302);
-    }
-
-    public function actionSearch() {
-
-
-        $NixxisParameters = Yii::$app->session->get('NixxisParameters');
-        $Script = Yii::$app->session->get('Script');
-        if (!$NixxisParameters instanceof NixxisParameters) {
-            die(htmlentities('htmlentities(Session Error'));
-        }
-
-        if ($NixxisParameters->autosearch == '' | $NixxisParameters->autosearch === null) {
-            die(htmlentities('Aucun numéro fourni pour la recherche'));
-        }
-
-        $ValidatedPhoneNumber = $NixxisParameters->validatePhoneNumber('FR');
-
-        if ($ValidatedPhoneNumber === null) {
-            die(htmlentities("Le numéro demandé n'est pas valide"));
-        }
-
-        if (!isset($Script['AutoSearch'])) {
-            die(htmlentities("Pas de champs défini pour la recherche automatique" . $NixxisParameters->diallerActivity));
-        }
-
-//        $ValidatedPhoneNumber = '000';
-
-        if (count($Script['AutoSearch'])) {
-            $search = null;
-            foreach ($Script['AutoSearch'] as $autosearchfield) {
-                if ($search !== null) {
-                    $search .= ' OR ';
-                }
-                $search .= $autosearchfield . " = '" . $ValidatedPhoneNumber . "' ";
-            }
-            $filtersearch = null;
-            if (isset($Script['SearchFilter']) && count($Script['SearchFilter'])) {
-                foreach ($Script['SearchFilter'] as $key => $value) {
-                    if ($filtersearch !== null) {
-                        $filtersearch .= ' AND ';
-                    }
-                    $filtersearch .= $key . " = '" . $value . "' ";
-                }
-            }
-            $search = '(' . $search . ')';
-            if ($filtersearch !== null) {
-                $search .= ' AND ' . $filtersearch;
-            }
-        } else {
-            die(htmlentities("Pas de champs défini pour la recherche automatique" . $NixxisParameters->diallerActivity));
-        }
-
-        $modelclass = 'app\models\Campaigns\DATA' . ucfirst($NixxisParameters->diallerCampaign);
-        $count = $modelclass::find()
-                ->where($search)
-                ->count();
-
-// ON A TROUVE PLUSIEURS ENREGISTREMENTS
-// ON PRESENTE TOUS LES ENREGISTREMENTS TROUVES
-        if ($count > 1) {
-            $dataProvider = new ActiveDataProvider([
-                'query' => $modelclass::find()->where($search)
-            ]);
-//            echo $search;
-//            exit(0);
-            return $this->render($Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/search', [
-                        'searchModel' => null,
-                        'dataProvider' => $dataProvider,
-                        'NixxisParameters' => $NixxisParameters,
-                        'Titre' => "SELECTION D'UNE FICHE",
-                        'Message' => "Le numéro a été trouvé plusieurs fois dans la base",
-            ]);
-        }
-// PAS D'ENREGISTREMENT TROUVE
-// ON FAIT UNE RECHERCHE MANUELLE
-        if (!$count) {
-            $searchModel = new $modelclass;
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $Script['SearchFilter']);
-            $dataProvider->pagination->pagesize = 10;
-            return $this->render($Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/search', [
-                        'searchModel' => $searchModel,
-                        'dataProvider' => $dataProvider,
-                        'NixxisParameters' => $NixxisParameters,
-                        'Titre' => "RECHERCHE MANUELLE D'UNE FICHE",
-                        'Message' => "Le numéro n'a pas été trouvé dans la base",
-            ]);
-        }
-        $model = $modelclass::find()
-                ->where("TEL1 = '" . $ValidatedPhoneNumber . "' OR TEL2 = '" . $ValidatedPhoneNumber . "'")
-                ->one();
-
-        if ($model instanceof $modelclass) {
-            $NixxisParameters->diallerReference = $model->Internal__id__;
-            Yii::$app->session->set('NixxisParameters', $NixxisParameters);
-            return $this->redirect(array($Script['ControllerDirectory'] . '_v' . $Script['Version'] . '/script/' . 'index',), 302);
-        } else {
-            die(htmlentities("Model non trouvé" . $NixxisParameters->diallerActivity));
-        }
-    }
-
     public function actionIndex() {
         $start = microtime(true);
         $model_qualifications = new NixxisQualifications();
@@ -286,28 +173,28 @@ class ScriptController extends Controller {
                 NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptQualify");
 
 
+                if ($model_qualifications->qualificationId == 'fe34e2235fd84bd49e4c9cdd7b57a080') {
+                    $Email = new Email();
 
-                $Email = new Email();
-
-                $Email->setSubject("La Chaîne de l’Espoir - Confirmation de l’augmentation de votre prélèvement automatique");
-                $Email->setFrom_email('servicedonateurs@chainedelespoir.org');
-                $Email->setFrom_name("La Chaîne de l'Espoir");
+                    $Email->setSubject("La Chaîne de l’Espoir - Confirmation de l’augmentation de votre prélèvement automatique");
+                    $Email->setFrom_email('servicedonateurs@chainedelespoir.org');
+                    $Email->setFrom_name("La Chaîne de l'Espoir");
 
 
 
-                if ($model->GetEmailsCount() == 2) {
-                    $Email->setRecipient($model_qualifications->email);
-                } else if ($model->EMAIL1 <> '') {
-                    $Email->setRecipient($model->EMAIL1);
-                } else if ($model->EMAIL2 <> '') {
-                    $Email->setRecipient($model->EMAIL2);
+                    if ($model->GetEmailsCount() == 2) {
+                        $Email->setRecipient($model_qualifications->email);
+                    } else if ($model->EMAIL1 <> '') {
+                        $Email->setRecipient($model->EMAIL1);
+                    } else if ($model->EMAIL2 <> '') {
+                        $Email->setRecipient($model->EMAIL2);
+                    }
+
+
+
+                    //$Email->setRecipient('info@byphone.eu');
+                    $Email->Send('ChaineUpgrade', $model);
                 }
-
-
-
-                //$Email->setRecipient('info@byphone.eu');
-                $Email->Send('ChaineUpgrade', $model);
-
 
                 return $this->render('last', [
                             'model' => $model,
