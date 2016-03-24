@@ -23,22 +23,25 @@ class iRaiserPayment {
         $base_url = $this->base_url . '/?cid=' . $this->cid . '&';
 
 //        $base_url .= urlencode('civility=' . $model->CIV) . '&';
-        $base_url .= ('firstname=' . $model->NOM) . '&';
-        $base_url .= ('lastname=' . $model->PRENOM) . '&';
-        $base_url .= ('email=' . $model->EMAIL1) . '&';
-        $base_url .= ('address1=' . $model->_NUMERO_DE_RUE . ' ' . $model->_CODE_BIS . ' ' . $model->ADR3 . ' ' . $model->ADR4) . '&';
-        $base_url .= ('address2=' . $model->ADR1 . ' ' . $model->ADR2) . '&';
-        $base_url .= ('postcode=' . $model->CP) . '&';
-        $base_url .= ('city=' . $model->VILLE) . '&';
+        $base_url .= trim('firstname=' . $model->NOM) . '&';
+        $base_url .= trim('lastname=' . $model->PRENOM) . '&';
+        $base_url .= trim('email=' . $model->EMAIL1) . '&';
+        $base_url .= trim('address1=' . $model->_NUMERO_DE_RUE . ' ' . $model->_CODE_BIS . ' ' . $model->ADR3 . ' ' . $model->ADR4) . '&';
+        $base_url .= trim('address2=' . $model->ADR1 . ' ' . $model->ADR2) . '&';
+        $base_url .= trim('postcode=' . $model->CP) . '&';
+        $base_url .= trim('city=' . $model->VILLE) . '&';
         $base_url .= 'country=FR&';
         $base_url .= 'frequency=once&';
-        $base_url .= ('amount=' . ($model->N_MONTANT * 100)) . '&';
+        $base_url .= trim('amount=' . ($model->N_MONTANT * 100)) . '&';
         $base_url .= 'free_amount=1&';
-        $base_url .= ('reserved_field=' . $model->CODE_MEDIA) . '&';
-        $base_url .= ('External_id=' . $model->IDENTIFIANT1) . '&';
+        $base_url .= trim('reserved_field=' . $model->CODE_MEDIA) . '&';
+        $base_url .= trim('External_id=' . $model->IDENTIFIANT1) . '&';
         $base_url .= 'nocache=' . uniqid();
 
-        return $base_url;
+
+        $base_url = str_replace(' ', '+', $base_url);
+
+        return ($base_url);
     }
 
 }

@@ -58,7 +58,6 @@ class SiteController extends Controller {
     public function actionIndex() {
         $start = microtime(true);
 
-
         $NixxisParameters = new NixxisParameters();
         $NixxisParameters->diallerCampaign = filter_input(INPUT_GET, 'diallerCampaign');
         $NixxisParameters->diallerActivity = filter_input(INPUT_GET, 'diallerActivity');
