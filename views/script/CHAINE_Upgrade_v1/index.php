@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\components\QualificationsWidget;
 use app\components\ErrorMessageWidget;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model \app\models\Campaigns\DATA4307f92b371f4d918b0d30be75048ef4 */
@@ -62,7 +63,7 @@ $this->title = 'Nixxis Reporting & Tools';
             if (isset($Script['IncomingQualificationError']) && $Script['IncomingQualificationError'] != '' && $NixxisParameters->ActivityType == $NixxisParameters::ACT_INBOUND && $model->scenario == 'RO') {
                 echo QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'qualificationid' => $Script['IncomingQualificationError'], 'datas' => $NixxisQualifications, 'model' => $model]);
             } else {
-                echo QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'datas' => $NixxisQualifications, 'model' => $model]);
+                echo QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'datas' => $NixxisQualifications, 'model' => $model, 'form' => $form]);
             }
 
 //            if (isset($Script['IncomingQualificationError']) && $Script['IncomingQualificationError'] != '') {
@@ -71,6 +72,9 @@ $this->title = 'Nixxis Reporting & Tools';
 //                        QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'qualificationid' => $Script['IncomingQualificationError'], 'datas' => $NixxisQualifications, 'model' => $model]);
 //            }
             ?>
+            <div class="row" style=" margin-left: 0px; margin-right: 0px;">
+                <?= $form->field($model, '_CODE_OBSERVATION')->dropDownList(ArrayHelper::map($model::GetFormulaireObs(), 'id', 'name'), ['options' => ['0' => ['Selected' => true]]], ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Raison du refus / Observation') ?>
+            </div>
             <div class="row" style=" margin-left: 0px; margin-right: 0px;">
                 <?= $form->field($model, 'COMMENTAIRE_APPEL')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>
             </div>

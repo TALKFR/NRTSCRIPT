@@ -86,7 +86,7 @@ class DATA29270ed61ca441e484431aaae9cd7e4b extends \app\models\Nixxis\Data {
     public function rules() {
         return [
             [['Internal__id__'], 'required'],
-            [['Internal__id__', 'CODE_MEDIA', 'IDENTIFIANT1', 'IDENTIFIANT2', 'CIV', 'NOM', 'PRENOM', '_RAISON_SOCIALE_ENTREPRISE', 'ADR1', 'ADR2', '_NUMERO_DE_RUE', '_CODE_BIS', 'ADR3', 'ADR4', 'CP', 'VILLE', 'PAYS', 'TEL1', 'TEL2', 'TEL3', 'EMAIL1', 'EMAIL2', 'A_MONTANT', 'A_PERIODICITE', 'A_DATEPA', 'COMMENTAIRE_APPEL', 'COMMENTAIRE_DONATEUR', 'DATE_DE_NAISSANCE', 'FILTRE', 'PRIORITE', 'N_MONTANT', 'N_PERIODICITE', 'N_DATEPA', 'RETOUR_FLAG', 'RETOUR_DATEIMPORT', 'RETOUR_NOMFICHIER', 'RETOUR_PROMESSE', 'RETOUR_MONTANT', 'RETOUR_PERIODICITE', 'RETOUR_COUPON', 'RETOUR_DATESIGNATURE', 'RETOUR_DATESAISIE', 'RETOUR_JOURPRELEVEMENT', 'RETOUR_PREMIERPRELEVEMENT', 'RETOUR_CATHEORIQUE', 'RETOUR_IDSCAN', 'RETOUR_DATEDENVOI'], 'string'],
+            [['Internal__id__', 'CODE_MEDIA', 'IDENTIFIANT1', 'IDENTIFIANT2', 'CIV', 'NOM', 'PRENOM', '_RAISON_SOCIALE_ENTREPRISE', 'ADR1', 'ADR2', '_NUMERO_DE_RUE', '_CODE_BIS', 'ADR3', 'ADR4', 'CP', 'VILLE', 'PAYS', 'TEL1', 'TEL2', 'TEL3', 'EMAIL1', 'EMAIL2', 'A_MONTANT', 'A_PERIODICITE', 'A_DATEPA', 'COMMENTAIRE_APPEL', 'COMMENTAIRE_DONATEUR', 'DATE_DE_NAISSANCE', 'FILTRE', 'PRIORITE', 'N_MONTANT', 'N_PERIODICITE', 'N_DATEPA', 'RETOUR_FLAG', 'RETOUR_DATEIMPORT', 'RETOUR_NOMFICHIER', 'RETOUR_PROMESSE', 'RETOUR_MONTANT', 'RETOUR_PERIODICITE', 'RETOUR_COUPON', 'RETOUR_DATESIGNATURE', 'RETOUR_DATESAISIE', 'RETOUR_JOURPRELEVEMENT', 'RETOUR_PREMIERPRELEVEMENT', 'RETOUR_CATHEORIQUE', 'RETOUR_IDSCAN', 'RETOUR_DATEDENVOI', '_CODE_OBSERVATION'], 'string'],
             [['MODIF_ADRESSE', 'MODIF_EMAIL', 'MODIF_TEL'], 'integer'],
             [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
             [['TEL1', 'TEL2', 'TEL3'], 'app\components\NixxisPhoneNumberValidator', 'format' => 'FR'],
@@ -154,7 +154,25 @@ class DATA29270ed61ca441e484431aaae9cd7e4b extends \app\models\Nixxis\Data {
             'RETOUR_CATHEORIQUE' => 'Retour  Catheorique',
             'RETOUR_IDSCAN' => 'Retour  Idscan',
             'RETOUR_DATEDENVOI' => 'Retour  Datedenvoi',
+            '_CODE_OBSERVATION' => 'Code observation'
         ];
+    }
+
+    public static function GetFormulaireObs() {
+        return array(
+            ['id' => '0', 'name' => 'Pas d\'observation'],
+            ['id' => '1', 'name' => 'Ne souhaite plus être appelé'],
+            ['id' => '2', 'name' => 'Désire être rayé du fichier'],
+            ['id' => '3', 'name' => 'Désire recevoir 1 à 2 courriers'],
+            ['id' => '4', 'name' => 'N\'a pas reçu son reçu fiscal'],
+            ['id' => '5', 'name' => 'Déçu par l\'organisme'],
+            ['id' => '6', 'name' => 'Souhaite être bénévole'],
+            ['id' => '7', 'name' => 'Décédé'],
+            ['id' => '8', 'name' => 'Déménagé'],
+            ['id' => '9', 'name' => 'Doublons'],
+            ['id' => '10', 'name' => 'N\'adhère plus à la cause'],
+            ['id' => '11', 'name' => 'A quitté l\'association']
+        );
     }
 
     public static function GetFormulaireCycles() {

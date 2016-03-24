@@ -15,7 +15,9 @@ class QualificationsWidget extends Widget {
     public $col = 3;
     public $datas = array();
     public $model;
+    public $form;
     public $qualificationid;
+    public $htmltoadd;
 
     public function init() {
 
@@ -89,6 +91,11 @@ class QualificationsWidget extends Widget {
             }
         }
         $html.= '</p>';
+
+
+        $html.= $this->htmltoadd;
+
+
 
         $html.='      <div class="row" style=" margin-left: 0px; margin-right: 0px; margin-top: 5px;">';
         $html.='  <div class="col-sm-12" style="margin-top: 5px; background-color: #113060;  height: 2px;"></div>';

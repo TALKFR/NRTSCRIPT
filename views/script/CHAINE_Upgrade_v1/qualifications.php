@@ -187,6 +187,17 @@ use app\components\iRaiserPayment;
                     $iRaiserPayment->setBase_url('https://donner.chainedelespoir.org');
                     $iRaiserPayment->setCid('18');
                     echo '<a href="' . $iRaiserPayment->GetUrl($model) . '" target="_blank">Cliquez ici pour effectuer le paiement en ligne</a>';
+//                    echo '                  
+//  <script type="text/javascript">
+//  function openURL()
+//  {
+//      var shell = new ActiveXObject("WScript.Shell");
+//      shell.run("Firefox ' . $iRaiserPayment->GetUrl($model) . '");
+//  }
+//  </script>';
+                    echo ' <input type="button" onclick="openURL()" value="Cliquez ici pour effectuer le paiement en ligne">';
+
+
                     //echo Html::a('Link', [$iRaiserPayment->GetUrl($model)], ['target' => '_blank']);
                     // echo '<iframe src="' . $iRaiserPayment->GetUrl($model) . '" style="width:100%; height:500px"></iframe>';
                     echo $form->field($model, 'N_MONTANT')->textInput()->label('Montant du don');
