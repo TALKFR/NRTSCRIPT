@@ -219,7 +219,7 @@ class ScriptController extends Controller {
         //$this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
 
 
-        if ($model_qualifications->qualificationId == 'fe34e2235fd84bd49e4c9cdd7b57a080' && (($model->EMAIL1 == '' & $model->EMAIL2 == ''))) {
+        if ($model->load(Yii::$app->request->post()) && $model->save() && $model_qualifications->qualificationId == 'fe34e2235fd84bd49e4c9cdd7b57a080' && (($model->EMAIL1 == '' && $model->EMAIL2 == ''))) {
             $model->addError('EMAIL1', 'Il faut au moins une adresse email');
             $model->scenario = '';
             NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptGoto");
