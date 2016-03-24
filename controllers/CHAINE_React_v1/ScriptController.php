@@ -147,30 +147,6 @@ class ScriptController extends Controller {
             if ($model_qualifications->load(Yii::$app->request->post()) && $model_qualifications->validate()) {
                 NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptQualify");
 
-
-
-                $Email = new Email();
-
-                $Email->setSubject("La Chaîne de l’Espoir - Confirmation de l’augmentation de votre prélèvement automatique");
-                $Email->setFrom_email('servicedonateurs@chainedelespoir.org');
-                $Email->setFrom_name("La Chaîne de l'Espoir");
-
-
-
-                if ($model->GetEmailsCount() == 2) {
-                    $Email->setRecipient($model_qualifications->email);
-                } else if ($model->EMAIL1 <> '') {
-                    $Email->setRecipient($model->EMAIL1);
-                } else if ($model->EMAIL2 <> '') {
-                    $Email->setRecipient($model->EMAIL2);
-                }
-
-
-
-                //$Email->setRecipient('info@byphone.eu');
-                $Email->Send('ChaineUpgrade', $model);
-
-
                 return $this->render('last', [
                             'model' => $model,
                             'Script' => $Script,
