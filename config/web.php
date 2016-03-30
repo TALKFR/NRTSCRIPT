@@ -11,6 +11,8 @@ $config = [
         'audit' => [
             'class' => 'bedezign\yii2\audit\Audit',
             'db' => 'dbaudit',
+            'accessUsers' => null, // (List of) user(s) IDs with access to the viewer, null for everyone (if the role matches)
+            'accessRoles' => null, // (List of) role(s) with access to the viewer, null for everyone (if the user matches)            
         ],
     ],
     'components' => [
