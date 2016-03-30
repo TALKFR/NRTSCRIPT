@@ -1,5 +1,8 @@
 <?php
 
+use Yii;
+use app\components\NrtLogger;
+
 /* @var $this yii\web\View */
 /* @var $model \app\models\DATA0331e68e23ca4e308b49869bffbe5c79 */
 $url = Yii::$app->params['Nixxis_Url'];
@@ -10,6 +13,16 @@ if (isset($Script['IncomingQualificationError'])) {
         $NixxisParameters->diallerReference = null;
     }
 }
+Yii::info($NixxisParameters->sessionid . ' ' . ' ****************** FINAL QUALIFICATION REQUEST ***************** ', 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' IP Address           : ' . filter_input(INPUT_SERVER, "REMOTE_ADDR"), 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' Session ID           : ' . $NixxisParameters->sessionid, 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' Contact ID           : ' . $NixxisParameters->contactid, 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' Service URL          : ' . $url, 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' Dialer Reference     : ' . $NixxisParameters->diallerReference, 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' Qualification ID     : ' . $NixxisQualifications->qualificationId, 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' CallBack DateTime    : ' . $NixxisQualifications->CallbackNixxisformat, 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' CallBack PhoneNumber : ' . $NixxisQualifications->callbackPhone, 'trace');
+Yii::info($NixxisParameters->sessionid . ' ' . ' ******************  END REQUEST  ****************** ', 'trace');
 
 $this->registerJs("
     
