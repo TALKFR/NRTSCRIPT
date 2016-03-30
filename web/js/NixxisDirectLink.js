@@ -66,6 +66,8 @@ var NixxisDirectLink =
 
                             link.open('POST', fullUrl + '?events=no&fmt=uri&action=' + commandCode.toString(), false);
                             link.send(data);
+                            window.jsLogger.captureTypes.push('info');
+                            window.jsLogger.info(link.responseText);
 
                             response = link.responseText;
                             break;
@@ -94,6 +96,7 @@ var NixxisDirectLink =
 
                     link = null;
                 }
+
 
                 return response;
             },
