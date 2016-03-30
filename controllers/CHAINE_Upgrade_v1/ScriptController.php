@@ -196,6 +196,7 @@ class ScriptController extends Controller {
                     $Email->Send('ChaineUpgrade', $model);
                 }
 
+
                 return $this->render('last', [
                             'model' => $model,
                             'Script' => $Script,

@@ -7,6 +7,12 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+        'audit' => [
+            'class' => 'bedezign\yii2\audit\Audit',
+            'db' => 'dbaudit',
+        ],
+    ],
     'components' => [
         'assetManager' => [
             'bundles' => [
@@ -105,6 +111,7 @@ $config = [
         ],
         'db' => require(__DIR__ . '/db.php'),
         'dbv2' => require(__DIR__ . '/dbv2.php'),
+        'dbaudit' => require(__DIR__ . '/dbaudit.php'),
     ],
     'params' => $params,
 ];

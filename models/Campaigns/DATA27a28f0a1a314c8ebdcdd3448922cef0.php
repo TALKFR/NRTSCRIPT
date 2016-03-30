@@ -199,7 +199,7 @@ class DATA27a28f0a1a314c8ebdcdd3448922cef0 extends \app\models\Nixxis\Data {
     public static function GetFormulaireCycles() {
         return array(
             ['id' => '1', 'name' => 'Tous les mois'],
-            ['id' => '2', 'name' => 'Tous les 2 mois'],
+//            ['id' => '2', 'name' => 'Tous les 2 mois'],
             ['id' => '3', 'name' => 'Tous les 3 mois'],
             ['id' => '6', 'name' => 'Tous les 6 mois'],
             ['id' => '12', 'name' => 'Tous les 12 mois'],

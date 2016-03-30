@@ -38,6 +38,9 @@ class Email {
         $params = [
             'model' => $model
         ];
+
+
+
         \Yii::$app->mail->compose($mail, $params)
                 ->setFrom([$this->from_email => $this->from_name])
                 ->setTo($this->recipient)
