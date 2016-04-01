@@ -68,6 +68,13 @@ return [
             'ControllerStart' => 'index',
             'Activities' => ['8b65ba21a32141ef820096efe40407a9', '20d684f4f62644699f41aaebefcab7fa'],
         ],
+        ['Name' => 'GREENPEACE REACTIVATION CYCLE 3',
+            'Commentaire' => '',
+            'Version' => 1,
+            'ControllerDirectory' => 'GP_React',
+            'ControllerStart' => 'index',
+            'Activities' => ['144758f7846c45adb8e2efc3aa572aa1', '18d11b3622d246949ba9000c88eb9995'],
+        ],
     ],
 ];
 
