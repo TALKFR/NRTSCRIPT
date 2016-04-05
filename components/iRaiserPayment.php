@@ -28,8 +28,8 @@ class iRaiserPayment {
         $base_url = $this->base_url . '/?cid=' . $this->cid . '&';
 
 //        $base_url .= urlencode('civility=' . $model->CIV) . '&';
-        $base_url .= trim('firstname=' . $model->NOM) . '&';
-        $base_url .= trim('lastname=' . $model->PRENOM) . '&';
+        $base_url .= trim('firstname=' . $model->PRENOM) . '&';
+        $base_url .= trim('lastname=' . $model->NOM) . '&';
         $base_url .= trim('email=' . $model->EMAIL1) . '&';
         $base_url .= trim('address1=' . $model->_NUMERO_DE_RUE . ' ' . $model->_CODE_BIS . ' ' . $model->ADR3 . ' ' . $model->ADR4) . '&';
         $base_url .= trim('address2=' . $model->ADR1 . ' ' . $model->ADR2) . '&';
