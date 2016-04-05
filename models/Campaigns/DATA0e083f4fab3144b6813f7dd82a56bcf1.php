@@ -4,6 +4,10 @@ namespace app\models\Campaigns;
 
 use Yii;
 
+/*
+ * UNADEV FACTEURS
+ */
+
 /**
  * This is the model class for table "DATA_0e083f4fab3144b6813f7dd82a56bcf1".
  *
