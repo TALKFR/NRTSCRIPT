@@ -160,7 +160,7 @@ class DATA27a28f0a1a314c8ebdcdd3448922cef0 extends \app\models\Nixxis\Data {
     public function beforeSave($insert) {
         parent::beforeSave($insert);
 
-        if (($this->ADR1 != $this->getOldAttribute('ADR1')) || ($this->ADR2 != $this->getOldAttribute('ADR2')) || ($this->ADR3 != $this->getOldAttribute('ADR3')) || ($this->ADR4 != $this->getOldAttribute('ADR4')) || ($this->CP != $this->getOldAttribute('CP')) || ($this->VILLE != $this->getOldAttribute('VILLE')) || ($this->PAYS != $this->getOldAttribute('PAYS')) || ($this->PAYS != $this->getOldAttribute('_NUMERO_DE_RUE')) || ($this->PAYS != $this->getOldAttribute('_CODE_BIS'))
+        if (($this->ADR1 != $this->getOldAttribute('ADR1')) || ($this->ADR2 != $this->getOldAttribute('ADR2')) || ($this->ADR3 != $this->getOldAttribute('ADR3')) || ($this->ADR4 != $this->getOldAttribute('ADR4')) || ($this->CP != $this->getOldAttribute('CP')) || ($this->VILLE != $this->getOldAttribute('VILLE')) || ($this->PAYS != $this->getOldAttribute('PAYS')) || ($this->_NUMERO_DE_RUE != $this->getOldAttribute('_NUMERO_DE_RUE')) || ($this->_CODE_BIS != $this->getOldAttribute('_CODE_BIS'))
         ) {
             $this->MODIF_ADRESSE = 1;
         }
