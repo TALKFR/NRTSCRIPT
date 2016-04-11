@@ -76,11 +76,12 @@ return [
             'Activities' => ['144758f7846c45adb8e2efc3aa572aa1', '18d11b3622d246949ba9000c88eb9995'],
         ],
         ['Name' => 'LEADS BTOB',
+            'Module' => 1,
             'Commentaire' => '',
             'Version' => 1,
             'ControllerDirectory' => 'Artisans',
             'ControllerStart' => 'index',
-            'Activities' => ['84c8c73584364bdba8dbd733c72ec6cc'],
+            'Activities' => ['84c8c73584364bdba8dbd733c72ec6cc', '97941fdff18b438e919aac8bcd41be9b'],
         ],
     ],
 ];

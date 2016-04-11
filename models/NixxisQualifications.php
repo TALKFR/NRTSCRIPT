@@ -19,6 +19,7 @@ class NixxisQualifications extends Model {
     public $callbackTime;
     public $callbackPhone;
     public $availableemails;
+    public $nextstep;
     public $email;
 
     public function rules() {
@@ -28,6 +29,7 @@ class NixxisQualifications extends Model {
             ['callbackDateTime', 'safe'],
             ['callbackDate', 'safe'],
             ['callbackTime', 'safe'],
+            ['nextstep', 'safe'],
             ['availableemails', 'safe'],
             ['email', 'safe'],
 //            ['callbackPhone', 'safe'],

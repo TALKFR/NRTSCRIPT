@@ -1,0 +1,36 @@
+<?php
+
+namespace app\scripts;
+
+use Yii;
+
+class Scripts extends \yii\base\Module {
+
+    public $controllerNamespace = 'app\scripts';
+
+    public function init() {
+        parent::init();
+        $directories = glob($this->getBasePath() . '/*', GLOB_ONLYDIR);
+        foreach ($directories as $directory) {
+            $value[basename($directory)] = ['class' => "app\scripts\\" . basename($directory) . "\Module"];
+        }
+
+
+
+        $this->modules = $value;
+    }
+
+    public static function GetExtraReportList() {
+        $array = array();
+        $reflector = new \ReflectionClass(static::class);
+        $directories = glob(dirname($reflector->getFileName()) . '/*', GLOB_ONLYDIR);
+        foreach ($directories as $directory) {
+            if (file_exists($directory . '/Module.php')) {
+                $classname = $reflector->getNamespaceName() . "\\" . basename($directory) . "\Module";
+                $array[] = ['Id' => $classname::getId(), 'Name' => $classname::getName(), 'Description ' => $classname::getDescription()];
+            }
+        }
+        return $array;
+    }
+
+}

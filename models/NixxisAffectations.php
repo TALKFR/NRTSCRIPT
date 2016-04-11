@@ -14,11 +14,13 @@ class NixxisAffectations extends Model {
     public $AutoSearch;
     public $SearchFilter;
     public $IncomingQualificationError;
+    public $Module;
 
     public function rules() {
         return [
 
             [['Version', 'ControllerDirectory', 'ControllerStart', 'Activities'], 'required'],
+            [['Module'], 'safe'],
             [['ControllerDirectory', 'ControllerStart', 'IncomingQualificationError', 'Commentaire'], 'string'],
             [['Activities', 'SearchFilter', 'AutoSearch'], 'checkIsArray'],
             ['Version', 'integer'],

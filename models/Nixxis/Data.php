@@ -56,4 +56,12 @@ class Data extends \yii\db\ActiveRecord {
         return $years;
     }
 
+    public static function getFirstAvailable($array) {
+        foreach ($array as $value) {
+            if ($value != '') {
+                return $value;
+            }
+        }
+    }
+
 }

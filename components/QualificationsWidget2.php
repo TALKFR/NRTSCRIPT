@@ -5,7 +5,7 @@ namespace app\components;
 use yii\base\Widget;
 use yii\helpers\Html;
 
-class QualificationsWidget extends Widget {
+class QualificationsWidget2 extends Widget {
 
     const POSITIVES = 1;
     const NEGATIVES = -1;
@@ -78,17 +78,21 @@ class QualificationsWidget extends Widget {
                         }
                         $html.= '<p style="height : 30px; text-align:center;">';
                     }
-                    if ($this->type <= 0) {
-                        if ($NixxisQualification['Action'] != 4) {
-                            $html.= Html::submitButton($NixxisQualification['Description'], ['class' => 'btn ' . $style . '', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ',
-                                        'onclick' => 'SetQualification("' . $NixxisQualification['Id'] . '")'
-                            ]);
-                        } else {
-                            $html.= Html::a($NixxisQualification['Description'], ['goto', 'Internal__id__' => $this->model->Internal__id__], ['class' => 'btn btn-info', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ', 'onclick' => 'SetQualification("' . $NixxisQualification['Id'] . '")', 'data' => ['method' => 'post']]);
-                        }
-                    } else {
-                        $html.= Html::a($NixxisQualification['Description'], ['goto', 'Internal__id__' => $this->model->Internal__id__], ['class' => 'btn btn-success', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ', 'onclick' => 'SetQualification("' . $NixxisQualification['Id'] . '")', 'data' => ['method' => 'post']]);
-                    }
+//                    if ($this->type <= 0) {
+//                        if ($NixxisQualification['Action'] != 4) {
+//                            $html.= Html::submitButton($NixxisQualification['Description'], ['class' => 'btn ' . $style . '', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ',
+//                                        'onclick' => 'SetQualification("' . $NixxisQualification['Id'] . '")'
+//                            ]);
+//                        } else {
+//                            $html.= Html::a($NixxisQualification['Description'], ['goto', 'Internal__id__' => $this->model->Internal__id__], ['class' => 'btn btn-info', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ', 'onclick' => 'SetQualification("' . $NixxisQualification['Id'] . '")', 'data' => ['method' => 'post']]);
+//                        }
+//                    } else {
+//                        $html.= Html::a($NixxisQualification['Description'], ['goto', 'Internal__id__' => $this->model->Internal__id__], ['class' => 'btn btn-success', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ', 'onclick' => 'SetQualification("' . $NixxisQualification['Id'] . '")', 'data' => ['method' => 'post']]);
+//                    }
+
+                    $html.= Html::submitButton($NixxisQualification['Description'], ['class' => 'btn ' . $style . '', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ',
+                                'onclick' => 'SetQualification("' . $NixxisQualification['Id'] . '")'
+                    ]);
                     $col++;
                     $html.= '&nbsp;';
                 }

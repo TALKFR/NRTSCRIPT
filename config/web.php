@@ -14,6 +14,12 @@ $config = [
             'accessUsers' => null, // (List of) user(s) IDs with access to the viewer, null for everyone (if the role matches)
             'accessRoles' => null, // (List of) role(s) with access to the viewer, null for everyone (if the user matches)            
         ],
+        'Scripts' => [
+            'class' => '\app\scripts\Scripts',
+        ],
+        'test' => [
+            'class' => 'app\test\module',
+        ],
     ],
     'components' => [
         'assetManager' => [

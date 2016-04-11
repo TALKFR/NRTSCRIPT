@@ -18,6 +18,9 @@ use app\components\NrtLogger;
 //http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=b4cc418c204949078266f7bdc68e83a3&diallerActivity=ee4e2ad6a35f421fbfa196ad7dd9c91a&contactid=2e20a07add8848ec8987e35d7a6273b1&diallerReference=0bdd2406909047b88b4b935f8458ec51&autosearch=&sessionid=9bc0673373c24415ad9940b338e759e3
 //CHAINE DE L'ESPOIR UPGRADE
 //http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=29270ed61ca441e484431aaae9cd7e4b&diallerActivity=dc58c49f46fc4fa4a36f0eb1b8f4fe09&contactid=b57376609d944cf5b053126380f8759e&diallerReference=491ee84d279142a3a20406c6bdc9781f&autosearch=&sessionid=b6282c687f00417a9369efa1f4cb3aad
+// LEADS BTOB
+//http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=7a8c4a1663754805aeb8aa3fe83c071a&diallerActivity=84c8c73584364bdba8dbd733c72ec6cc&contactid=b57376609d944cf5b053126380f8759e&diallerReference=0112a24a465746ba9eb3438859179156&autosearch=&sessionid=b6282c687f00417a9369efa1f4cb3aad
+
 
 class SiteController extends Controller {
 
@@ -116,6 +119,13 @@ class SiteController extends Controller {
 
             NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $script, (microtime(true) - $start), "SiteController");
 
+//            print_r($script);
+//
+//            exit(0);
+
+            if (isset($script['Module']) && $script['Module'] == 1) {
+                return $this->redirect(array('Scripts/' . $script['ControllerDirectory'],), 302);
+            }
             return $this->redirect(array($script['ControllerDirectory'] . '_v' . $script['Version'] . '/script/' . $script['ControllerStart'],), 302);
         } else {
             print_r($NixxisParameters->errors);
