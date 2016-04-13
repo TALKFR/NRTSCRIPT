@@ -136,7 +136,7 @@ class DefaultController extends Controller {
 
                             foreach ($data as $sp) {
                                 $res = $WS->newSP($auth['sm_aff_id'], $auth['sm_token'], $auth['sm_kwids'][0], $sp); //On transmet chaque prospect
-                                //print_r($res);
+                                print_r($res);
                                 if (isset($res['body'])) {
                                     $tmp = json_decode($res['body']);
                                     if (isset($tmp->track_id)) {
