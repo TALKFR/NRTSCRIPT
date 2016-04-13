@@ -8,12 +8,12 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
-        'audit' => [
-            'class' => 'bedezign\yii2\audit\Audit',
-            'db' => 'dbaudit',
-            'accessUsers' => null, // (List of) user(s) IDs with access to the viewer, null for everyone (if the role matches)
-            'accessRoles' => null, // (List of) role(s) with access to the viewer, null for everyone (if the user matches)            
-        ],
+//        'audit' => [
+//            'class' => 'bedezign\yii2\audit\Audit',
+//            'db' => 'dbaudit',
+//            'accessUsers' => null, // (List of) user(s) IDs with access to the viewer, null for everyone (if the role matches)
+//            'accessRoles' => null, // (List of) role(s) with access to the viewer, null for everyone (if the user matches)            
+//        ],
         'Scripts' => [
             'class' => '\app\scripts\Scripts',
         ],
