@@ -27,9 +27,7 @@ var NixxisDirectLink =
                         if (arguments[i])
                             data += '&__p' + i.toString() + '=' + escape(arguments[i].toString());
                     }
-                    //window.jsLogger.captureTypes.push('info');
                     NixxisDirectLink.__linkImage[NixxisDirectLink.__linkImageIndex].src = fullUrl + '?events=no&fmt=uri&action=' + commandCode.toString() + '&inc=' + (++NixxisDirectLink.__sequence).toString() + data;
-                    //window.jsLogger.info(NixxisDirectLink.__linkImage[NixxisDirectLink.__linkImageIndex].src);
 
                     if (++NixxisDirectLink.__linkImageIndex >= NixxisDirectLink.__linkImage.length)
                         NixxisDirectLink.__linkImageIndex = 0;
@@ -66,8 +64,6 @@ var NixxisDirectLink =
 
                             link.open('POST', fullUrl + '?events=no&fmt=uri&action=' + commandCode.toString(), false);
                             link.send(data);
-                            //window.jsLogger.captureTypes.push('info');
-                            //window.jsLogger.info(link.responseText);
 
                             response = link.responseText;
                             break;
