@@ -5,5 +5,8 @@
     <span style="text-decoration: underline;"><b>Identifiant :</b> </span>
     <br><?= $model->IDENTIFIANT1 ?>
     <br>
+    <span style="text-decoration: underline;"><b>Code Media :</b> </span>
+    <br><?= $model->CODE_MEDIA ?>
+    <br>    
 </div>
 
