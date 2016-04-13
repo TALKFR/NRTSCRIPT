@@ -91,21 +91,34 @@ class DefaultController extends Controller {
 
 
                     if ($model->scenario == 'FIN') {
-                        //$WS = new \app\scripts\Artisans\v1\models\SM_CreateSP('fr', 'dev');
-                        $WS = new \app\scripts\Artisans\v1\models\SM_CreateSP('fr');
-
-
+                        $WS = new \app\scripts\Artisans\v1\models\SM_CreateSP('fr', 'dev');
+                        //$WS = new \app\scripts\Artisans\v1\models\SM_CreateSP('fr');
                         //print_r($model::getFirstAvailable(array($model->TEL1, $model->TEL2, $model->TEL3)));
 
-                        $auth = array(
-                            'sm_kwids' =>
-                            array(
-                                0 => 1008299387,
-                            ),
-                            'sm_token' => 'aDOFCgx2Ii6xMNis+sICuIjysalY2oKCMAcdNZhC4Mc=',
-                            'sm_aff_id' => '985',
-                            'sm_spa_accept' => 1,
-                        );
+                        if ($model->CODE_MEDIA == 'CIELS_DIRECT') {
+                            $auth = array(
+                                'sm_kwids' =>
+                                array(
+                                    0 => 1011661607,
+                                ),
+                                'sm_token' => '+/QOxWAIXKFeoZWdDciFtpavO49Mod57D+uIeX1qBZw=',
+                                'sm_aff_id' => 1372,
+                                'sm_spa_accept' => 0,
+                            );
+                        } else {
+                            $auth = array(
+                                'sm_kwids' =>
+                                array(
+                                    0 => 1008299387,
+                                ),
+                                'sm_token' => 'aDOFCgx2Ii6xMNis+sICuIjysalY2oKCMAcdNZhC4Mc=',
+                                'sm_aff_id' => '985',
+                                'sm_spa_accept' => 1,
+                            );
+                        }
+
+
+
                         $data = array(0 => array(
                                 'sp_id_worktype' => $model->_ACTIVITE1,
                                 'sp_pc' => $model->CP,
