@@ -165,7 +165,6 @@ class DefaultController extends Controller {
 
                     $NixxisDirectLink->setInternalId();
                     $NixxisDirectLink->setQualification($model_qualifications->qualificationId, $model_qualifications->getCallbackNixxisformat(), $model_qualifications->callbackPhone);
-                    exit(0);
 
                     return $this->render('last', [
                                 'model' => $model,
