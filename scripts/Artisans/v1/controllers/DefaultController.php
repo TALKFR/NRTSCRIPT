@@ -91,8 +91,8 @@ class DefaultController extends Controller {
 
 
                     if ($model->scenario == 'FIN') {
-                        $WS = new \app\scripts\Artisans\v1\models\SM_CreateSP('fr', 'dev');
-                        //$WS = new \app\scripts\Artisans\v1\models\SM_CreateSP('fr');
+//                        $WS = new \app\scripts\Artisans\v1\models\SM_CreateSP('fr', 'dev');
+                        $WS = new \app\scripts\Artisans\v1\models\SM_CreateSP('fr');
                         //print_r($model::getFirstAvailable(array($model->TEL1, $model->TEL2, $model->TEL3)));
 
                         if ($model->IDENTIFIANT2 == '') {
@@ -106,6 +106,7 @@ class DefaultController extends Controller {
                                     ),
                                     'sm_token' => '+/QOxWAIXKFeoZWdDciFtpavO49Mod57D+uIeX1qBZw=',
                                     'sm_aff_id' => '1372',
+//                                    'sm_aff_id' => '1286',
                                     'sm_spa_accept' => 0,
                                 );
                             } else {
@@ -142,7 +143,14 @@ class DefaultController extends Controller {
                                     if (isset($tmp->track_id)) {
                                         $model->IDENTIFIANT2 = (string) $tmp->track_id;
                                         $model->save();
+                                    } else {
+                                        Yii::info(print_r($res['body'], true), 'trace');
+                                        if (isset($res['data'])) {
+                                            Yii::info(print_r($res['data'], true), 'trace');
+                                        }
                                     }
+                                } else {
+                                    Yii::info(print_r($res, true), 'trace');
                                 }
                             }
                         }
@@ -157,7 +165,7 @@ class DefaultController extends Controller {
 
                     $NixxisDirectLink->setInternalId();
                     $NixxisDirectLink->setQualification($model_qualifications->qualificationId, $model_qualifications->getCallbackNixxisformat(), $model_qualifications->callbackPhone);
-
+                    exit(0);
 
                     return $this->render('last', [
                                 'model' => $model,
