@@ -20,7 +20,8 @@ use app\components\NrtLogger;
 //http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=29270ed61ca441e484431aaae9cd7e4b&diallerActivity=dc58c49f46fc4fa4a36f0eb1b8f4fe09&contactid=b57376609d944cf5b053126380f8759e&diallerReference=491ee84d279142a3a20406c6bdc9781f&autosearch=&sessionid=b6282c687f00417a9369efa1f4cb3aad
 // LEADS BTOB
 //http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=7a8c4a1663754805aeb8aa3fe83c071a&diallerActivity=84c8c73584364bdba8dbd733c72ec6cc&contactid=b57376609d944cf5b053126380f8759e&diallerReference=0112a24a465746ba9eb3438859179156&autosearch=&sessionid=b6282c687f00417a9369efa1f4cb3aad
-
+// LEADS TRAVAUX
+// http://10.100.30.110/nrtscriptdev/web/index.php?diallerCampaign=026bd2eb32b54ef2a797000f25f3f161&diallerActivity=0e1f92aa557e4082b874ee51131f6340&contactid=b57376609d944cf5b053126380f8759e&diallerReference=06dc53b061ac45bca40ba5f0dfc67773&autosearch=&sessionid=b6282c687f00417a9369efa1f4cb3aad
 
 class SiteController extends Controller {
 

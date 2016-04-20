@@ -238,8 +238,8 @@ class NixxisV2 {
 
 
         $Qualifications = new \SimpleXMLElement($resp);
-
-        foreach ($Qualifications->qualification->qualification as $GroupQualifications) {
+        foreach (is_array($Qualifications->qualification->qualification) || is_object($Qualifications->qualification->qualification) ? $Qualifications->qualification->qualification : array() as $GroupQualifications) {
+//        foreach ($Qualifications->qualification->qualification as $GroupQualifications) {
             foreach ($GroupQualifications->qualification as $Qualification) {
                 $tmp = [
                     'Id' => (string) $Qualification['id'],
