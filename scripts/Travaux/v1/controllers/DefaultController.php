@@ -155,8 +155,8 @@ class DefaultController extends Controller {
 
         $FormData['cus_srcommons_consumer_type_monovalue'] = 'srcommons_consumer_type_monovalue__private_individual';
         $FormData['cus_srcommons_occupant_type_monovalue'] = 'srcommons_occupant_type_monovalue__owner_occupier';
-        $FormData['cus_postcode'] = $model->CP;
-        $FormData['cus_town'] = $model->VILLE;
+        $FormData['cus_postcode'] = $model->_CP_TRAVAUX;
+        $FormData['cus_town'] = $model->_VILLE_TRAVAUX;
         $FormData['cus_email'] = $model::getFirstAvailable(array($model->EMAIL1, $model->EMAIL2));
         $FormData['cus_tel'] = $model::getFirstAvailable(array($model->TEL1, $model->TEL2, $model->TEL3));
         $FormData['cus_cell'] = '';
