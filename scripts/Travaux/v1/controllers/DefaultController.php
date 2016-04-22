@@ -55,12 +55,8 @@ class DefaultController extends Controller {
         }
 
 
-//        $Leads = Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference])->all();
-        $dataProvider = new ActiveDataProvider([
-            'query' => Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference]),
-        ]);
 
-
+        $dataProvider = Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference])->all();
         NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptIndex");
         return $this->render('index', [
                     'model' => $model,
@@ -289,9 +285,7 @@ class DefaultController extends Controller {
 
         $NixxisParameters = Yii::$app->session->get('NixxisParameters');
         $this->NixxisQualifications = Yii::$app->session->get('NixxisQualifications');
-        $dataProvider = new ActiveDataProvider([
-            'query' => Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference]),
-        ]);
+        $dataProvider = Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference])->all();
 
         if ($model_qualifications->qualificationId == '1234') {
             $model->scenario = 'ADDNEED';

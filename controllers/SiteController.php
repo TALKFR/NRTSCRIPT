@@ -125,6 +125,7 @@ class SiteController extends Controller {
 //            exit(0);
 
             if (isset($script['Module']) && $script['Module'] == 1) {
+                // die('jjj');
                 return $this->redirect(array('Scripts/' . $script['ControllerDirectory'],), 302);
             }
             return $this->redirect(array($script['ControllerDirectory'] . '_v' . $script['Version'] . '/script/' . $script['ControllerStart'],), 302);

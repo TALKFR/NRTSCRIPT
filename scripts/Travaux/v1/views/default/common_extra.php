@@ -8,6 +8,7 @@ use app\components\FormWidgets\LineWidget;
 use app\components\FormWidgets\TextBoxWidget;
 use app\components\FormWidgets\CheckBoxWidget;
 use app\components\FormWidgets\MonthYearWidget;
+use app\components\FormWidgets\YearWidget;
 ?>
 
 <?= LineWidget::widget() ?>
@@ -37,7 +38,7 @@ use app\components\FormWidgets\MonthYearWidget;
         <?= TextBoxWidget::widget(['label' => 'Nom', 'model' => $model, 'field' => '_NOM_CHIEN', 'form' => $form]) ?>
     </div>
     <div class="col-sm-3">
-        <?= TextBoxWidget::widget(['label' => 'Année de naissance', 'model' => $model, 'field' => '_ANNEE_NAISSANCE_CHIEN', 'form' => $form]) ?>
+        <?= YearWidget::widget(['label' => 'Année de naissance', 'model' => $model, 'field' => '_ANNEE_NAISSANCE_CHIEN', 'form' => $form]) ?>
     </div>
 </div> 
 <?= LineWidget::widget() ?>

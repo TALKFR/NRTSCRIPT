@@ -7,7 +7,6 @@ use app\components\QualificationsWidget2;
 use app\components\FormWidgets\QualificationsGroupWidget;
 use app\components\FormWidgets\TitleWidget;
 use app\components\FormWidgets\CheckBoxWidget;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model \app\models\Campaigns\DATA4307f92b371f4d918b0d30be75048ef4 */
@@ -57,22 +56,32 @@ $this->title = 'Nixxis Reporting & Tools';
             <label for="blockbesoins">Besoins du contact</label>
             <div id ="blockchien" class="row">
                 <div class="col-sm-12">
-                    <?=
-                    GridView::widget([
-                        'dataProvider' => $Leads,
-                        'summary' => "",
-                        'columns' => [
-                            [
-                                'attribute' => 'Identifiant',
-                                'value' => 'act_id',
-                            ],
-                            [
-                                'attribute' => 'Description',
-                                'value' => 'ActivityName',
-                            ],
-                        ],
-                    ]);
-                    ?>       </div>
+                    <?php
+                    echo '<ul>';
+                    foreach ($Leads as $Lead) {
+                        echo '<li style = "color: back;">' . $Lead->GetActivityName() . '(' . $Lead->act_id . ')' . '</li>';
+                    }
+                    echo '</ul>';
+                    ?>
+
+
+                    <?php
+//                    echo GridView::widget([
+//                        'dataProvider' => $Leads,
+//                        'summary' => "",
+//                        'columns' => [
+//                            [
+//                                'attribute' => 'Identifiant',
+//                                'value' => 'act_id',
+//                            ],
+//                            [
+//                                'attribute' => 'Description',
+//                                'value' => 'ActivityName',
+//                            ],
+//                        ],
+//                    ]);
+                    ?>      
+                </div>
 
 
             </div>             
