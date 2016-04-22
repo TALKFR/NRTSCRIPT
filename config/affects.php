@@ -89,7 +89,7 @@ return [
             'Version' => 1,
             'ControllerDirectory' => 'Travaux',
             'ControllerStart' => 'index',
-            'Activities' => ['0e1f92aa557e4082b874ee51131f6340'],
+            'Activities' => ['0e1f92aa557e4082b874ee51131f6340', 'aa56e8039c3e45eba01cda0a830a432c'],
         ],
         ['Name' => 'GREEENPEACE CYCLE 3',
             'Module' => 1,

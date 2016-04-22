@@ -21,11 +21,11 @@ $form = ActiveForm::begin(['id' => 'addneed', 'enableClientValidation' => false,
             'action' => ['step4', 'Internal__id__' => $model->Internal__id__]]);
 
 echo Html::hiddenInput('act_id', 'toto');
-echo $this->render('common_identity', [
-    'form' => $form,
-    'model' => $model,
-    'NixxisParameters' => $NixxisParameters,
-]);
+//echo $this->render('common_identity', [
+//    'form' => $form,
+//    'model' => $model,
+//    'NixxisParameters' => $NixxisParameters,
+//]);
 ?>
 <div class="row" style=" margin-left: 0px; margin-right: 0px; margin-top: 5px;">
     <div class="col-sm-12" style="margin-top: 5px; background-color: #113060;  height: 2px;"></div>

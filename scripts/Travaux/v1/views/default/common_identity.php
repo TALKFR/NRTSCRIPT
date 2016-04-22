@@ -2,15 +2,9 @@
 
 use yii\helpers\ArrayHelper;
 use app\components\FormWidgets\TextBoxWidget;
+use app\components\FormWidgets\CheckBoxWidget;
 ?>
-<div class="row">
-    <div class="col-sm-6">
-        <?= TextBoxWidget::widget(['label' => 'Raison sociale 1', 'model' => $model, 'field' => 'RS1', 'form' => $form]) ?>
-    </div>
-    <div class="col-sm-6">
-        <?= TextBoxWidget::widget(['label' => 'Raison sociale 2', 'model' => $model, 'field' => 'RS2', 'form' => $form]) ?>
-    </div>
-</div> 
+
 <div class="row">
     <div class="col-sm-2"  >
         <?= TextBoxWidget::widget(['label' => 'Civilité', 'model' => $model, 'field' => 'CIV', 'form' => $form]) ?>
@@ -39,17 +33,18 @@ use app\components\FormWidgets\TextBoxWidget;
         <?= TextBoxWidget::widget(['label' => 'Téléphone mobile', 'model' => $model, 'field' => 'TEL1', 'form' => $form]) ?>
     </div>
     <div class="col-sm-4">
+        <?= CheckBoxWidget::widget(['label' => 'Pas de mobile ?', 'model' => $model, 'field' => '_PAS_DE_TEL', 'form' => $form]) ?>
+    </div>    
+    <div class="col-sm-4">
         <?= TextBoxWidget::widget(['label' => 'Téléphone fixe', 'model' => $model, 'field' => 'TEL2', 'form' => $form]) ?>
     </div>        
-    <div class="col-sm-4">
-        <?= TextBoxWidget::widget(['label' => 'Téléphone professionnel', 'model' => $model, 'field' => 'TEL3', 'form' => $form]) ?>
-    </div>       
+
 </div>  
 <div class="row">
     <div class="col-sm-6">
         <?= TextBoxWidget::widget(['label' => 'Adresse Email 1', 'model' => $model, 'field' => 'EMAIL1', 'form' => $form]) ?>
     </div>
-    <div class="col-sm-6">
-        <?= TextBoxWidget::widget(['label' => 'Adresse Email 2', 'model' => $model, 'field' => 'EMAIL2', 'form' => $form]) ?>
-    </div>
+    <div class="col-sm-4">
+        <?= CheckBoxWidget::widget(['label' => 'Pas d\'email ?', 'model' => $model, 'field' => '_PAS_D_EMAIL', 'form' => $form]) ?>
+    </div>    
 </div>     

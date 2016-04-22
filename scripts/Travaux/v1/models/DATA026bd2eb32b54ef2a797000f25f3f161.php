@@ -2,6 +2,7 @@
 
 namespace app\scripts\Travaux\v1\models;
 
+use app\components\EitherValidator;
 use Yii;
 
 /**
@@ -37,29 +38,18 @@ use Yii;
  * @property string $PRIORITE
  * @property string $COMMENTAIRE_APPEL
  * @property string $_DATE_AUTO
- * @property integer $_DEJA_EMMENAGE
- * @property string $_DATE_EMMENAGEMENT
- * @property integer $_ALARME_INSTALLE
- * @property string $_ALARME_DATE_INSTALLATION
- * @property integer $_ALARME_A_INSTALLER
- * @property string $_DESCRIPTIF_ALARME_A_INSTALLER
  * @property string $_DATE_RAPPEL
  * @property string $_ADRESSE_TRAVAUX
  * @property string $_CP_TRAVAUX
  * @property string $_VILLE_TRAVAUX
- * @property string $_CONSTRUCTEUR
- * @property string $_SITUATION_ACTUELLE
- * @property string $_ASSURANCE_PRET
- * @property integer $_MRH_OK_DEVIS
- * @property integer $_ARTISAN_OK_DEVIS
  * @property integer $_CHIEN
  * @property integer $_DEVIS_CHIEN
  * @property string $_NOM_CHIEN
  * @property string $_ANNEE_NAISSANCE_CHIEN
- * @property string $_DESCRIPTIF_PRO
- * @property integer $_PROFESSIONNEL_ARTISAN
  * @property integer $_DON_GREENPEACE
  * @property integer $_DON_ENFANTS_AVEUGLES
+ * @property integer $_PAS_DE_TEL
+ * @property integer $_PAS_D_EMAIL
  */
 class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
 
@@ -83,8 +73,13 @@ class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
     public function rules() {
         return [
             [['Internal__id__'], 'required'],
-            [['Internal__id__', 'RS2', 'ADR1', 'RS1', 'IDENTIFIANT2', 'IDENTIFIANT1', 'CODE_MEDIA', 'PRENOM', 'NOM', 'CIV', 'ADR2', 'NUMERO_DE_RUE', 'CODE_BIS', 'ADR3', 'ADR4', 'CP', 'VILLE', 'PAYS', 'TEL1', 'TEL2', 'TEL3', 'EMAIL1', 'EMAIL2', 'FILTRE', 'PRIORITE', 'COMMENTAIRE_APPEL', '_DATE_AUTO', '_DATE_EMMENAGEMENT', '_ALARME_DATE_INSTALLATION', '_DESCRIPTIF_ALARME_A_INSTALLER', '_DATE_RAPPEL', '_ADRESSE_TRAVAUX', '_CP_TRAVAUX', '_VILLE_TRAVAUX', '_CONSTRUCTEUR', '_SITUATION_ACTUELLE', '_ASSURANCE_PRET', '_NOM_CHIEN', '_ANNEE_NAISSANCE_CHIEN', '_DESCRIPTIF_PRO'], 'string'],
-            [['MODIF_ADRESSE', 'MODIF_TEL', 'MODIF_EMAIL', '_DEJA_EMMENAGE', '_ALARME_INSTALLE', '_ALARME_A_INSTALLER', '_MRH_OK_DEVIS', '_ARTISAN_OK_DEVIS', '_CHIEN', '_DEVIS_CHIEN', '_PROFESSIONNEL_ARTISAN', '_DON_GREENPEACE', '_DON_ENFANTS_AVEUGLES'], 'integer']
+            [['Internal__id__', 'RS2', 'ADR1', 'RS1', 'IDENTIFIANT2', 'IDENTIFIANT1', 'CODE_MEDIA', 'PRENOM', 'NOM', 'CIV', 'ADR2', 'NUMERO_DE_RUE', 'CODE_BIS', 'ADR3', 'ADR4', 'CP', 'VILLE', 'PAYS', 'TEL1', 'TEL2', 'TEL3', 'EMAIL1', 'EMAIL2', 'FILTRE', 'PRIORITE', 'COMMENTAIRE_APPEL', '_DATE_AUTO', '_DATE_RAPPEL', '_ADRESSE_TRAVAUX', '_CP_TRAVAUX', '_VILLE_TRAVAUX', '_NOM_CHIEN', '_ANNEE_NAISSANCE_CHIEN'], 'string'],
+            [['MODIF_ADRESSE', 'MODIF_TEL', 'MODIF_EMAIL', '_CHIEN', '_DEVIS_CHIEN', '_DON_GREENPEACE', '_DON_ENFANTS_AVEUGLES', '_PAS_DE_TEL', '_PAS_D_EMAIL'], 'integer'],
+            [['EMAIL1', 'NOM', 'PRENOM', 'CP', 'VILLE'], 'required', 'on' => 'ADDNEED', 'message' => 'Ce champs ne peut être vide'],
+            [['TEL1', 'TEL2'], EitherValidator::className(), 'on' => 'ADDNEED', 'message' => 'Ce champs ne peut être vide'],
+            [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
+            [['EMAIL1', 'NOM', 'PRENOM', 'CP', 'VILLE'], 'required', 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
+            [['TEL1', 'TEL2'], EitherValidator::className(), 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
         ];
     }
 
@@ -123,29 +118,18 @@ class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
             'PRIORITE' => 'Priorite',
             'COMMENTAIRE_APPEL' => 'Commentaire  Appel',
             '_DATE_AUTO' => 'Date  Auto',
-            '_DEJA_EMMENAGE' => 'Deja  Emmenage',
-            '_DATE_EMMENAGEMENT' => 'Date  Emmenagement',
-            '_ALARME_INSTALLE' => 'Alarme  Installe',
-            '_ALARME_DATE_INSTALLATION' => 'Alarme  Date  Installation',
-            '_ALARME_A_INSTALLER' => 'Alarme  A  Installer',
-            '_DESCRIPTIF_ALARME_A_INSTALLER' => 'Descriptif  Alarme  A  Installer',
             '_DATE_RAPPEL' => 'Date  Rappel',
             '_ADRESSE_TRAVAUX' => 'Adresse  Travaux',
             '_CP_TRAVAUX' => 'Cp  Travaux',
             '_VILLE_TRAVAUX' => 'Ville  Travaux',
-            '_CONSTRUCTEUR' => 'Constructeur',
-            '_SITUATION_ACTUELLE' => 'Situation  Actuelle',
-            '_ASSURANCE_PRET' => 'Assurance  Pret',
-            '_MRH_OK_DEVIS' => 'Mrh  Ok  Devis',
-            '_ARTISAN_OK_DEVIS' => 'Artisan  Ok  Devis',
             '_CHIEN' => 'Chien',
             '_DEVIS_CHIEN' => 'Devis  Chien',
             '_NOM_CHIEN' => 'Nom  Chien',
             '_ANNEE_NAISSANCE_CHIEN' => 'Annee  Naissance  Chien',
-            '_DESCRIPTIF_PRO' => 'Descriptif  Pro',
-            '_PROFESSIONNEL_ARTISAN' => 'Professionnel  Artisan',
             '_DON_GREENPEACE' => 'Don  Greenpeace',
             '_DON_ENFANTS_AVEUGLES' => 'Don  Enfants  Aveugles',
+            '_PAS_DE_TEL' => 'Pas  De  Tel',
+            '_PAS_D_EMAIL' => 'Pas  D  Email',
         ];
     }
 

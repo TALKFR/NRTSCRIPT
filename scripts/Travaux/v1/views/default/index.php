@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use app\components\QualificationsWidget2;
 use app\components\FormWidgets\QualificationsGroupWidget;
 use app\components\FormWidgets\TitleWidget;
+use app\components\FormWidgets\CheckBoxWidget;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -52,23 +53,33 @@ $this->title = 'Nixxis Reporting & Tools';
                 'model' => $model,
             ])
             ?> 
-            Besoins du contact
-            <?=
-            GridView::widget([
-                'dataProvider' => $Leads,
-                'summary' => "",
-                'columns' => [
-                    [
-                        'attribute' => 'Identifiant',
-                        'value' => 'act_id',
-                    ],
-                    [
-                        'attribute' => 'Description',
-                        'value' => 'ActivityName',
-                    ],
-                ],
-            ]);
-            ?>            
+
+            <label for="blockbesoins">Besoins du contact</label>
+            <div id ="blockchien" class="row">
+                <div class="col-sm-12">
+                    <?=
+                    GridView::widget([
+                        'dataProvider' => $Leads,
+                        'summary' => "",
+                        'columns' => [
+                            [
+                                'attribute' => 'Identifiant',
+                                'value' => 'act_id',
+                            ],
+                            [
+                                'attribute' => 'Description',
+                                'value' => 'ActivityName',
+                            ],
+                        ],
+                    ]);
+                    ?>       </div>
+
+
+            </div>             
+
+
+
+
 
 
             <?= QualificationsGroupWidget::widget(['type' => QualificationsGroupWidget::NEGATIVES, 'datas' => $NixxisQualifications, 'model' => $model]) ?>
@@ -85,24 +96,27 @@ $this->title = 'Nixxis Reporting & Tools';
 
 
     </div>
-    <?php
-    ActiveForm::end();
-    ?>           
+
     <div class="row">
         <div class="col-sm-2" >
 
         </div>
         <div class="col-sm-10">
             <?php
-            ActiveForm::begin(['id' => 'addneed', 'enableClientValidation' => false,
-                'action' => ['step3', 'Internal__id__' => $model->Internal__id__]]);
+//            ActiveForm::begin(['id' => 'addneed', 'enableClientValidation' => false,
+//                'action' => ['step3', 'Internal__id__' => $model->Internal__id__]]);
+
             echo '<p style="text-align:center; padding: 5px;">';
-            echo Html::submitButton('Ajouter un besoin', ['class' => 'btn_sucess', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ']);
+            echo Html::submitButton('Ajouter un besoin', ['class' => 'btn_sucess', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ', 'onclick' => 'SetQualification("' . '1234' . '")']);
             echo '</p>';
-            ActiveForm::end();
+//            ActiveForm::end();
             ?>            
         </div>
-    </div>
+    </div>   
+    <?php
+    ActiveForm::end();
+    ?>           
+
 
 
 </div>

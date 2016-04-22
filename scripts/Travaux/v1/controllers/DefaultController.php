@@ -82,8 +82,6 @@ class DefaultController extends Controller {
 //
 //        print_r(SM_ListActivities::ListActivities());
 //        exit(0);
-
-        $model->scenario = 'RO';
         return $this->render('wishlist', [
                     'model' => $model,
                     'NixxisParameters' => $NixxisParameters,
@@ -91,6 +89,33 @@ class DefaultController extends Controller {
                     'Module' => $this->module,
                     'ListActivities' => SM_ListActivities::ListActivities(),
         ]);
+//        $model->scenario = 'ADDNEED';
+//        if ($model->load(Yii::$app->request->post())) {
+//            $model->scenario = 'RO';
+//            return $this->render('wishlist', [
+//                        'model' => $model,
+//                        'NixxisParameters' => $NixxisParameters,
+//                        'Script' => $Script,
+//                        'Module' => $this->module,
+//                        'ListActivities' => SM_ListActivities::ListActivities(),
+//            ]);
+//        } else {
+//            $model_qualifications = new NixxisQualifications();
+//            $model_qualifications->load(Yii::$app->request->post());
+//            $dataProvider = new ActiveDataProvider([
+//                'query' => Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference]),
+//            ]);
+//            print_r($model->errors);
+////            return $this->render('index', [
+////                        'model' => $model,
+////                        'NixxisParameters' => $NixxisParameters,
+////                        'Script' => $Script,
+////                        'model_qualifications' => $model_qualifications,
+////                        'NixxisQualifications' => $this->NixxisQualifications,
+////                        'Module' => $this->module,
+////                        'Leads' => $dataProvider
+////            ]);
+//        }
     }
 
     public function actionStep4($Internal__id__) {
@@ -152,6 +177,10 @@ class DefaultController extends Controller {
             if ($GenForm == -1) {
                 return $this->redirect(array("/Scripts/Travaux/default/step3", 'Internal__id__' => $Internal__id__));
             }
+
+
+
+
 
 
 
@@ -260,6 +289,42 @@ class DefaultController extends Controller {
 
         $NixxisParameters = Yii::$app->session->get('NixxisParameters');
         $this->NixxisQualifications = Yii::$app->session->get('NixxisQualifications');
+        $dataProvider = new ActiveDataProvider([
+            'query' => Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference]),
+        ]);
+
+        if ($model_qualifications->qualificationId == '1234') {
+            $model->scenario = 'ADDNEED';
+            $model->load(Yii::$app->request->post());
+
+            if ($model->_PAS_D_EMAIL == true) {
+
+                $model->EMAIL1 = strtolower($model->NOM);
+                if ($model->PRENOM <> '') {
+                    $model->EMAIL1 .= '.' . strtolower($model->PRENOM);
+                }
+                $model->EMAIL1 .= '@gmail.com';
+                $model->EMAIL1 = str_replace(' ', '', $model->EMAIL1);
+                $model->EMAIL1 = filter_var($model->EMAIL1, FILTER_SANITIZE_EMAIL, FILTER_FLAG_STRIP_LOW);
+            }
+
+            if ($model->save()) {
+                return $this->redirect(array("/Scripts/Travaux/default/step3", 'Internal__id__' => $Internal__id__));
+            } else {
+
+                $model->scenario = 'default';
+                return $this->render('index', [
+                            'model' => $model,
+                            'NixxisParameters' => $NixxisParameters,
+                            'Script' => $Script,
+                            'model_qualifications' => $model_qualifications,
+                            'NixxisQualifications' => $this->NixxisQualifications,
+                            'Module' => $this->module,
+                            'Leads' => $dataProvider
+                ]);
+            }
+        }
+
 
         $this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
 
@@ -282,7 +347,19 @@ class DefaultController extends Controller {
 
 
                     if ($model->scenario == 'FIN') {
-                        
+                        if (Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference])->count() == 0) {
+                            $model->scenario = 'default';
+
+                            return $this->render('index', [
+                                        'model' => $model,
+                                        'model_qualifications' => $model_qualifications,
+                                        'NixxisParameters' => $NixxisParameters,
+                                        'Script' => $Script,
+                                        'NixxisQualifications' => $this->NixxisQualifications,
+                                        'Module' => $this->module,
+                                        'Leads' => $dataProvider
+                            ]);
+                        }
                     }
 
 
