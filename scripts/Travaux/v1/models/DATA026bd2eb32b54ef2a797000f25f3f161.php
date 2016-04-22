@@ -75,10 +75,10 @@ class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
             [['Internal__id__'], 'required'],
             [['Internal__id__', 'RS2', 'ADR1', 'RS1', 'IDENTIFIANT2', 'IDENTIFIANT1', 'CODE_MEDIA', 'PRENOM', 'NOM', 'CIV', 'ADR2', 'NUMERO_DE_RUE', 'CODE_BIS', 'ADR3', 'ADR4', 'CP', 'VILLE', 'PAYS', 'TEL1', 'TEL2', 'TEL3', 'EMAIL1', 'EMAIL2', 'FILTRE', 'PRIORITE', 'COMMENTAIRE_APPEL', '_DATE_AUTO', '_DATE_RAPPEL', '_ADRESSE_TRAVAUX', '_CP_TRAVAUX', '_VILLE_TRAVAUX', '_NOM_CHIEN', '_ANNEE_NAISSANCE_CHIEN'], 'string'],
             [['MODIF_ADRESSE', 'MODIF_TEL', 'MODIF_EMAIL', '_CHIEN', '_DEVIS_CHIEN', '_DON_GREENPEACE', '_DON_ENFANTS_AVEUGLES', '_PAS_DE_TEL', '_PAS_D_EMAIL'], 'integer'],
-            [['EMAIL1', 'NOM', 'PRENOM', 'CP', 'VILLE'], 'required', 'on' => 'ADDNEED', 'message' => 'Ce champs ne peut être vide'],
+            [['EMAIL1', 'NOM', 'PRENOM', '_CP_TRAVAUX', '_VILLE_TRAVAUX'], 'required', 'on' => 'ADDNEED', 'message' => 'Ce champs ne peut être vide'],
             [['TEL1', 'TEL2'], EitherValidator::className(), 'on' => 'ADDNEED', 'message' => 'Ce champs ne peut être vide'],
             [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
-            [['EMAIL1', 'NOM', 'PRENOM', 'CP', 'VILLE'], 'required', 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
+            [['EMAIL1', 'NOM', 'PRENOM', '_CP_TRAVAUX', '_VILLE_TRAVAUX'], 'required', 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
             [['TEL1', 'TEL2'], EitherValidator::className(), 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
             [['MOIS_RAPPEL', 'ANNEE_RAPPEL'], 'safe'],
         ];
