@@ -6,34 +6,25 @@ use Yii;
 
 class custommodel extends \app\models\Nixxis\Data {
 
-    public $N_DATEPA_DAY;
-    public $N_DATEPA_MONTH;
-    public $N_DATEPA_YEAR;
-    public $DATE_RAPPEL;
-    public $HEURE_RAPPEL;
+    public $MOIS_RAPPEL;
+    public $ANNEE_RAPPEL;
+
+    public function afterFind() {
+        if ($this->_DATE_RAPPEL != '') {
+            $this->MOIS_RAPPEL = substr($this->_DATE_RAPPEL, 0, 2);
+            $this->ANNEE_RAPPEL = substr($this->_DATE_RAPPEL, 3, 4);
+        }
+    }
 
     public function beforeValidate() {
         parent::beforeValidate();
 
-//        if ($this->DATE_RAPPEL != '' && $this->HEURE_RAPPEL != '') {
-//            $this->_DATE_RAPPEL = $this->DATE_RAPPEL . ' ' . $this->HEURE_RAPPEL;
-//        }
-//        if ($this->N_DATEPA_MONTH != '' && $this->N_DATEPA_YEAR != '') {
-//            $this->_DATE_CREATION = $this->N_DATEPA_MONTH . '/' . $this->N_DATEPA_YEAR;
-//        }
+
+        if ($this->ANNEE_RAPPEL <> '') {
+            $this->_DATE_RAPPEL = $this->MOIS_RAPPEL . '/' . $this->ANNEE_RAPPEL;
+        }
 
         return true;
-    }
-
-    public function afterFind() {
-//        if ($this->_DATE_CREATION != '') {
-//            $this->N_DATEPA_MONTH = substr($this->_DATE_CREATION, 0, 2);
-//            $this->N_DATEPA_YEAR = substr($this->_DATE_CREATION, 3, 4);
-//        }
-//        if ($this->_DATE_RAPPEL != '') {
-//            $this->DATE_RAPPEL = substr($this->_DATE_RAPPEL, 0, 10);
-//            $this->HEURE_RAPPEL = substr($this->_DATE_RAPPEL, 11, 5);
-//        }
     }
 
     public function beforeSave($insert) {

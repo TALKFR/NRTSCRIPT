@@ -154,7 +154,7 @@ class DATA29270ed61ca441e484431aaae9cd7e4b extends \app\models\Nixxis\Data {
             'RETOUR_CATHEORIQUE' => 'Retour  Catheorique',
             'RETOUR_IDSCAN' => 'Retour  Idscan',
             'RETOUR_DATEDENVOI' => 'Retour  Datedenvoi',
-            '_CODE_OBSERVATION' => 'Code observation'
+            '_CODE_OBSERVATION' => 'Code observation',
         ];
     }
 

@@ -46,10 +46,10 @@ class Data extends \yii\db\ActiveRecord {
         return $months;
     }
 
-    public static function getYears() {
+    public static function getYears($limit = 2) {
         $years = array();
         $curYear = date("Y");
-        $limit = 2;
+
         for ($x = $curYear; $x < $curYear + $limit; $x++) {
             $years[$x] = $x;
         }

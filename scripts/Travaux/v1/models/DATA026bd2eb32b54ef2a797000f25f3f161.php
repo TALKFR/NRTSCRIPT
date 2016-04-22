@@ -80,6 +80,7 @@ class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
             [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
             [['EMAIL1', 'NOM', 'PRENOM', 'CP', 'VILLE'], 'required', 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
             [['TEL1', 'TEL2'], EitherValidator::className(), 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
+            [['MOIS_RAPPEL', 'ANNEE_RAPPEL'], 'safe'],
         ];
     }
 
@@ -130,6 +131,7 @@ class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
             '_DON_ENFANTS_AVEUGLES' => 'Don  Enfants  Aveugles',
             '_PAS_DE_TEL' => 'Pas  De  Tel',
             '_PAS_D_EMAIL' => 'Pas  D  Email',
+            'DATE_RAPPEL' => 'Quelle date ?'
         ];
     }
 

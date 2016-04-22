@@ -7,6 +7,7 @@ use kartik\time\TimePicker;
 use app\components\FormWidgets\LineWidget;
 use app\components\FormWidgets\TextBoxWidget;
 use app\components\FormWidgets\CheckBoxWidget;
+use app\components\FormWidgets\MonthYearWidget;
 ?>
 
 <?= LineWidget::widget() ?>
@@ -50,7 +51,14 @@ use app\components\FormWidgets\CheckBoxWidget;
     </div>
 
 </div> 
+<?= LineWidget::widget() ?>
+<label for="blockrappel">Rappel</label>
+<div id ="blockchien" class="row">
 
+    <?= MonthYearWidget::widget(['label_month' => 'Mois', 'label_year' => 'Année', 'model' => $model, 'field_month' => 'MOIS_RAPPEL', 'field_year' => 'ANNEE_RAPPEL', 'form' => $form]) ?>
+
+
+</div> 
 
 
 <?= LineWidget::widget() ?>
