@@ -124,7 +124,7 @@ class DefaultController extends Controller {
         if (isset($_POST['recherche'])) {
             if (isset($_POST['search']) && $_POST['search'] <> '') {
                 foreach ($ListActivities as $key => $value) {
-                    if (!strstr($value['keywords'], SM_ListActivities::removeAccents($_POST['search']))) {
+                    if (!strstr($value['keywords'], SM_ListActivities::removeAccents(strtolower($_POST['search'])))) {
                         unset($ListActivities[$key]);
                     }
                 }
