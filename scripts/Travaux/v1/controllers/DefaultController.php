@@ -146,11 +146,11 @@ class DefaultController extends Controller {
 
         $FormData = array();
         $FormData['cus_title'] = '';
-//        $FormData['cus_last_name'] = $model->NOM;
-//        $FormData['cus_first_name'] = $model->PRENOM;
-
-        $FormData['cus_last_name'] = 'POUILLY';
-        $FormData['cus_first_name'] = 'GUILLAUME';
+        $FormData['cus_last_name'] = $model->NOM;
+        $FormData['cus_first_name'] = $model->PRENOM;
+//
+//        $FormData['cus_last_name'] = 'POUILLY';
+//        $FormData['cus_first_name'] = 'GUILLAUME';
 
 
         $FormData['cus_srcommons_consumer_type_monovalue'] = 'srcommons_consumer_type_monovalue__private_individual';
