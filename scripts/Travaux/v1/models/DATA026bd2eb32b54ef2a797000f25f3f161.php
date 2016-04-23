@@ -54,6 +54,8 @@ use Yii;
  * @property integer $_DEVIS_CHAT
  * @property string $_NOM_CHAT
  * @property string $_ANNEE_NAISSANCE_CHAT
+ * @property string $_NB_CHAT
+ * @property string $_NB_CHIEN
  */
 class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
 
@@ -85,7 +87,7 @@ class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
             [['EMAIL1', 'NOM', 'PRENOM', '_CP_TRAVAUX', '_VILLE_TRAVAUX'], 'required', 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
             [['TEL1', 'TEL2'], EitherValidator::className(), 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
             [['MOIS_RAPPEL', 'ANNEE_RAPPEL'], 'safe'],
-            [['_CHAT', '_DEVIS_CHAT', '_ANNEE_NAISSANCE_CHAT', '_NOM_CHAT'], 'safe'],
+            [['_CHAT', '_DEVIS_CHAT', '_ANNEE_NAISSANCE_CHAT', '_NOM_CHAT', '_NB_CHAT', '_NB_CHIEN'], 'safe'],
         ];
     }
 

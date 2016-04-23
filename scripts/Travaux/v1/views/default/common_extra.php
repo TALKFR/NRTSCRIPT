@@ -9,6 +9,7 @@ use app\components\FormWidgets\TextBoxWidget;
 use app\components\FormWidgets\CheckBoxWidget;
 use app\components\FormWidgets\MonthYearWidget;
 use app\components\FormWidgets\YearWidget;
+use app\components\FormWidgets\SelectWidget;
 ?>
 
 <?= LineWidget::widget() ?>
@@ -26,7 +27,7 @@ use app\components\FormWidgets\YearWidget;
     </div>
 </div> 
 <?= LineWidget::widget() ?>
-<label for="blocktravaux">Renseignements sur le chien</label>
+<label for="blockchien">Renseignements sur le chien</label>
 <div id ="blockchien" class="row">
     <div class="col-sm-3">
         <?= CheckBoxWidget::widget(['label' => 'Avez vous un chien ?', 'model' => $model, 'field' => '_CHIEN', 'form' => $form]) ?>
@@ -40,6 +41,34 @@ use app\components\FormWidgets\YearWidget;
     <div class="col-sm-3">
         <?= YearWidget::widget(['label' => 'Année de naissance', 'model' => $model, 'field' => '_ANNEE_NAISSANCE_CHIEN', 'form' => $form]) ?>
     </div>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <?= SelectWidget::widget(['label' => 'Nombre de chien(s)', 'model' => $model, 'field' => '_NB_CHIEN', 'form' => $form, 'data' => ['1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5 et +']]) ?>
+    </div>   
+</div> 
+<?= LineWidget::widget() ?>
+<label for="blockchat">Renseignements sur le chat</label>
+<div id ="blockchat" class="row">
+    <div class="col-sm-3">
+        <?= CheckBoxWidget::widget(['label' => 'Avez vous un chat ?', 'model' => $model, 'field' => '_CHAT', 'form' => $form]) ?>
+    </div>
+    <div class="col-sm-3">
+        <?= CheckBoxWidget::widget(['label' => 'Devis mutuelle ?', 'model' => $model, 'field' => '_DEVIS_CHAT', 'form' => $form]) ?>
+    </div>
+
+    <div class="col-sm-3">
+        <?= TextBoxWidget::widget(['label' => 'Nom', 'model' => $model, 'field' => '_NOM_CHAT', 'form' => $form]) ?>
+    </div>
+    <div class="col-sm-3">
+        <?= YearWidget::widget(['label' => 'Année de naissance', 'model' => $model, 'field' => '_ANNEE_NAISSANCE_CHAT', 'form' => $form]) ?>
+    </div> 
+
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <?= SelectWidget::widget(['label' => 'Nombre de chat(s)', 'model' => $model, 'field' => '_NB_CHAT', 'form' => $form, 'data' => ['1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5 et +']]) ?>
+    </div>   
 </div> 
 <?= LineWidget::widget() ?>
 <label for="blockdons">Dons</label>
