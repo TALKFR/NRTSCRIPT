@@ -88,7 +88,7 @@ class GenForm {
                 # Form of customer
                 $html_customer = '
 		<ul id="customer">
-			<li>
+			<li style="margin:10px;background-color:#ffc2b3;">
 				<div class="required">Civilité <span class="required">*</span></div>
 				<select name="cus_title" class="form-control">
 						<option value="M.">M.</option>
@@ -192,9 +192,18 @@ class GenForm {
 
                             # If crt_type corresponds to a select
                             if ($grp_critere['crt_type'] == 'select') {
-                                $html_grp_criteres = '	<select name="scq_' . $grp_critere['question_key'] . '" class="form-control">
+                                if ($grp_critere['question_key'] == 'reason_for_request_monovalue') {
+                                    $html_grp_criteres = '	<select name="scq_' . $grp_critere['question_key'] . '" class="form-control">
+								<option value="reason_for_request_monovalue__get_quotes_choose_available_company">Obtenir des devis et trouver une entreprise</option>	</select>';
+                                } else {
+                                    $html_grp_criteres = '	<select name="scq_' . $grp_critere['question_key'] . '" class="form-control">
 								' . $html_grp_criteres . ' 	</select>';
+                                }
 
+
+
+
+//scq_reason_for_request_monovalue
                                 # If crt_type corresponds to a text
                             } else if ($grp_critere['crt_type'] == 'text') {
                                 $html_grp_criteres = '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $grp_critere['question_key'] . '" value="" class="form-control"/>';
