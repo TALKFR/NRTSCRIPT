@@ -135,7 +135,7 @@ class GenForm {
 				<div>Téléphone secondaire</div>
 				<input type="text" name="cus_cell" value="' . $FormData['cus_cell'] . '" class="form-control" />
 			</li>
-			<li>
+			<li style="margin:10px;background-color:#ffc2b3;">
 				<div>Horaires pour vous joindre<span class="required">*</span></div>
 				<input type="text" name="cus_availibility" value="' . $FormData['cus_availibility'] . '" class="form-control" />
 			</li>
@@ -171,8 +171,11 @@ class GenForm {
                                         # If the type is a checkbox or radio button
                                         if (preg_match("#radio|checkbox#", $grp_critere['crt_type'])) {
                                             $name = $grp_critere['question_key'] . ($grp_critere['crt_type'] == 'checkbox' ? '[]' : '');
-                                            $html_grp_criteres .= '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $name . '" value="' . $answer . '" class="form-control" />
-									<label>' . htmlentities(utf8_decode($crt_valeur['libelle'])) . '</label>';
+
+
+
+                                            $html_grp_criteres .= '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $name . '" value="' . $answer . '" class="" />
+									<label>' . htmlentities(($crt_valeur['libelle'])) . '</label>';
 
                                             # Otherwise, if the type is a select
                                         } else if ($grp_critere['crt_type'] == 'select') {
@@ -208,7 +211,10 @@ class GenForm {
                                 }
                                 try {
                                     //echo $grp_critere['crt_question'];
-                                    $html_questions .= '<li>
+                                    $style = 'style="margin:10px;';
+                                    $style .= ($grp_critere['required'] === '') ? '' : 'background-color:#ffc2b3;';
+                                    $style .='"';
+                                    $html_questions .= '<li ' . $style . '>
                                             <div>
                                                     ' . htmlentities(($grp_critere['crt_question'])) . ' ' . $grp_critere['required'] . '
                                             </div>' .
