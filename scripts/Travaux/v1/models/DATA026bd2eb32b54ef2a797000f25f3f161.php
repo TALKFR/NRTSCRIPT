@@ -50,6 +50,10 @@ use Yii;
  * @property integer $_DON_ENFANTS_AVEUGLES
  * @property integer $_PAS_DE_TEL
  * @property integer $_PAS_D_EMAIL
+ * @property integer $_CHAT
+ * @property integer $_DEVIS_CHAT
+ * @property string $_NOM_CHAT
+ * @property string $_ANNEE_NAISSANCE_CHAT
  */
 class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
 
@@ -81,6 +85,7 @@ class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
             [['EMAIL1', 'NOM', 'PRENOM', '_CP_TRAVAUX', '_VILLE_TRAVAUX'], 'required', 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
             [['TEL1', 'TEL2'], EitherValidator::className(), 'on' => 'FIN', 'message' => 'Ce champs ne peut être vide'],
             [['MOIS_RAPPEL', 'ANNEE_RAPPEL'], 'safe'],
+            [['_CHAT', '_DEVIS_CHAT', '_ANNEE_NAISSANCE_CHAT', '_NOM_CHAT'], 'safe'],
         ];
     }
 
@@ -131,7 +136,10 @@ class DATA026bd2eb32b54ef2a797000f25f3f161 extends custommodel {
             '_DON_ENFANTS_AVEUGLES' => 'Don  Enfants  Aveugles',
             '_PAS_DE_TEL' => 'Pas  De  Tel',
             '_PAS_D_EMAIL' => 'Pas  D  Email',
-            'DATE_RAPPEL' => 'Quelle date ?'
+            '_CHAT' => 'Chat',
+            '_DEVIS_CHAT' => 'Devis  Chat',
+            '_NOM_CHAT' => 'Nom  Chat',
+            '_ANNEE_NAISSANCE_CHAT' => 'Annee  Naissance  Chat',
         ];
     }
 
