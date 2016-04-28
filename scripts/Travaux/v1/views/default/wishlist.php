@@ -18,7 +18,7 @@ use app\components\FormWidgets\LineWidget;
 </script>  
 <?php
 $form = ActiveForm::begin(['id' => 'addneed', 'enableClientValidation' => false,
-            'action' => ['step4', 'Internal__id__' => $model->Internal__id__]]);
+            'action' => ['index', 'Internal__id__' => $model->Internal__id__]]);
 
 echo Html::hiddenInput('act_id', 'toto');
 //echo $this->render('common_identity', [
@@ -42,14 +42,14 @@ echo Html::hiddenInput('act_id', 'toto');
         </p>
         <?= LineWidget::widget() ?>
         <p style="text-align:center;margin-top: 5px;">
-            <?= ButtonWidget::widget(['label' => 'Retour', 'action' => 'index', 'parameters' => ['Internal__id__' => $model->Internal__id__]]) ?>
+            <?= ButtonWidget::widget(['label' => 'Retour', 'action' => 'default/index', 'parameters' => ['Internal__id__' => $model->Internal__id__]]) ?>
 
         </p>
     </div>
     <div class="col-sm-10">
         <?php
         foreach ($ListActivities as $Activity) {
-            echo Html::submitButton($Activity['libelle'], [ 'class' => 'btn_info', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 10px 1px; margin :5px; ', 'onclick' => 'SetActivityId(' . $Activity['id'] . ')']);
+            echo Html::submitButton($Activity['libelle'], [ 'name' => 'goto', 'class' => 'btn_info', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 10px 1px; margin :5px; ', 'onclick' => 'SetActivityId(' . $Activity['id'] . ')']);
         }
         ?>            
     </div>

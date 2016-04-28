@@ -27,7 +27,7 @@ class ButtonWidget extends Widget {
             $html.= Html::a($this->label, $array, ['class' => 'btn btn-danger', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 6px 1px; ']);
             $html.= '</p>';
         } catch (\Exception $ex) {
-            $html = "<p style='color:red'>" . 'Line Error' . "</p>";
+            $html = "<p style='color:red'>" . 'Button Error' . "</p>";
         }
         return $html;
     }

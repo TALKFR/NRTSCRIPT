@@ -120,6 +120,7 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
         'dbv2' => require(__DIR__ . '/dbv2.php'),
         'db123devis' => require(__DIR__ . '/db123devis.php'),
+        'dbscripts' => require(__DIR__ . '/dbscripts.php'),
         'dbaudit' => require(__DIR__ . '/dbaudit.php'),
     ],
     'params' => $params,

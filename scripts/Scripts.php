@@ -20,14 +20,14 @@ class Scripts extends \yii\base\Module {
         $this->modules = $value;
     }
 
-    public static function GetExtraReportList() {
+    public static function GetScriptsList() {
         $array = array();
         $reflector = new \ReflectionClass(static::class);
         $directories = glob(dirname($reflector->getFileName()) . '/*', GLOB_ONLYDIR);
         foreach ($directories as $directory) {
             if (file_exists($directory . '/Module.php')) {
                 $classname = $reflector->getNamespaceName() . "\\" . basename($directory) . "\Module";
-                $array[] = ['Id' => $classname::getId(), 'Name' => $classname::getName(), 'Description ' => $classname::getDescription()];
+                $array[] = [ 'Name' => $classname::getName()];
             }
         }
         return $array;

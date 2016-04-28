@@ -14,7 +14,7 @@ use app\components\FormWidgets\LineWidget;
 </div>
 <?php
 $form = ActiveForm::begin(['id' => 'wish', 'enableClientValidation' => false,
-            'action' => ['step5', 'Internal__id__' => $model->Internal__id__, 'act_id' => $jsonobject['act_id']]]);
+            'action' => ['add', 'Internal__id__' => $model->Internal__id__, 'act_id' => $jsonobject['act_id']]]);
 
 
 echo $this->render('common_identity', [
@@ -52,7 +52,7 @@ echo '<p style="text-align:center">';
 echo Html::submitButton('Ajouter le besoin', ['class' => 'btn_info', 'style' => 'width:32%; font-size:10px; font-weight: bold;     padding: 10px 1px; margin :5px; ']);
 echo '</p>';
 
-echo ButtonWidget::widget(['label' => 'Retour', 'action' => 'step3', 'parameters' => ['Internal__id__' => $model->Internal__id__]]);
+echo ButtonWidget::widget(['label' => 'Retour', 'action' => 'wish-list/index', 'parameters' => ['Internal__id__' => $model->Internal__id__]]);
 
 
 

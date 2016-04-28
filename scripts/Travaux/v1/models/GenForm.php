@@ -91,9 +91,9 @@ class GenForm {
 			<li style="margin:10px;background-color:#ffc2b3;">
 				<div class="required">Civilité <span class="required">*</span></div>
 				<select name="cus_title" class="form-control">
-						<option value="M.">M.</option>
-					<option value="Mme">Mme</option>
-					<option value="Mlle">Mlle</option>
+                                        <option' . ((isset($FormData['cus_title']) && $FormData['cus_title'] == 'M.') ? ' selected' : '') . ' value="M.">M.</option>
+					<option' . ((isset($FormData['cus_title']) && $FormData['cus_title'] == 'Mme') ? ' selected' : '') . ' value="Mme">Mme</option>
+					<option' . ((isset($FormData['cus_title']) && $FormData['cus_title'] == 'Mlle') ? ' selected' : '') . ' value="Mlle">Mlle</option>
 			</select>
 			</li>
 			<li>
@@ -160,6 +160,7 @@ class GenForm {
                                 if (is_array($grp_critere['crt_valeurs_by_rang']) and $grp_critere['crt_valeurs_by_rang']) {
 
                                     foreach ($grp_critere['crt_valeurs_by_rang'] as $key_crt_valeur => $crt_valeur) {
+
                                         if (is_array($grp_critere['criteria_json'][$key_crt_valeur])) {
                                             $answer = $grp_critere['criteria_json'][$key_crt_valeur]['answer_key'];
                                         }
@@ -172,19 +173,38 @@ class GenForm {
                                         if (preg_match("#radio|checkbox#", $grp_critere['crt_type'])) {
                                             $name = $grp_critere['question_key'] . ($grp_critere['crt_type'] == 'checkbox' ? '[]' : '');
 
+//
+//                                            $html_grp_criteres .= '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $name . '" value="' . $answer . '" class="" />
+//									<label>' . htmlentities(($crt_valeur['libelle'])) . '</label>';
 
+                                            if (isset($FormData['scq_' . $grp_critere['question_key']]) && $answer == $FormData['scq_' . $grp_critere['question_key']]) {
 
-                                            $html_grp_criteres .= '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $name . '" value="' . $answer . '" class="" />
+                                                $html_grp_criteres .= '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $name . '" value="' . $answer . '" class="" checked/>
 									<label>' . htmlentities(($crt_valeur['libelle'])) . '</label>';
-
+                                            } else {
+                                                $html_grp_criteres .= '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $name . '" value="' . $answer . '" class="" />
+									<label>' . htmlentities(($crt_valeur['libelle'])) . '</label>';
+                                            }
                                             # Otherwise, if the type is a select
                                         } else if ($grp_critere['crt_type'] == 'select') {
-                                            $html_grp_criteres .= '		<option value="' . $answer . '">' . htmlentities(($crt_valeur['libelle'])) . '</option>';
+                                            if (isset($FormData['scq_' . $grp_critere['question_key']]) && $answer == $FormData['scq_' . $grp_critere['question_key']]) {
+                                                $html_grp_criteres .= '		<option selected value="' . $answer . '">' . htmlentities(($crt_valeur['libelle'])) . '</option>';
+                                            }
+//                                            echo $answer;
+//                                            exit(0);
+                                            else {
+                                                $html_grp_criteres .= '		<option value="' . $answer . '">' . htmlentities(($crt_valeur['libelle'])) . '</option>';
+                                            }
                                         }
                                     }
                                 }
                             } catch (\Exception $ex) {
+                                //print_r($grp_critere);
                                 //die('Erreur dans le fichier JSON ' . $filename_json);
+                                //echo $filename_json;
+//                                echo $ex->getTraceAsString();
+//                                echo $ex->getMessage();
+//                                exit(0);
                                 return -1;
                             }
 
@@ -196,6 +216,8 @@ class GenForm {
                                     $html_grp_criteres = '	<select name="scq_' . $grp_critere['question_key'] . '" class="form-control">
 								<option value="reason_for_request_monovalue__get_quotes_choose_available_company">Obtenir des devis et trouver une entreprise</option>	</select>';
                                 } else {
+
+
                                     $html_grp_criteres = '	<select name="scq_' . $grp_critere['question_key'] . '" class="form-control">
 								' . $html_grp_criteres . ' 	</select>';
                                 }
@@ -206,11 +228,11 @@ class GenForm {
 //scq_reason_for_request_monovalue
                                 # If crt_type corresponds to a text
                             } else if ($grp_critere['crt_type'] == 'text') {
-                                $html_grp_criteres = '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $grp_critere['question_key'] . '" value="" class="form-control"/>';
+                                $html_grp_criteres = '	<input type="' . $grp_critere['crt_type'] . '" name="scq_' . $grp_critere['question_key'] . '" value="' . (isset($FormData['scq_' . $grp_critere['question_key']]) ? $FormData['scq_' . $grp_critere['question_key']] : '') . '" class="form-control"/>';
 
                                 # If crt_type corresponds to a textarea
                             } else if ($grp_critere['crt_type'] == 'textarea') {
-                                $html_grp_criteres = '	<textarea name="scq_' . $grp_critere['question_key'] . '" class="form-control"></textarea>';
+                                $html_grp_criteres = '	<textarea name="scq_' . $grp_critere['question_key'] . '" class="form-control" >' . (isset($FormData['scq_' . $grp_critere['question_key']]) ? $FormData['scq_' . $grp_critere['question_key']] : '') . ' </textarea>';
                             }
 
                             # If the html code group criteria has been successfully generated, it is added to $ html_questions
