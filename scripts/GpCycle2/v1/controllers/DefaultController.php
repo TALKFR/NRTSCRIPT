@@ -79,9 +79,9 @@ class DefaultController extends Controller {
 
 
 //        $Leads = Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference])->all();
-        $dataProvider = new ActiveDataProvider([
-            'query' => Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference]),
-        ]);
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference]),
+//        ]);
 
 
         NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptIndex");
