@@ -3,7 +3,7 @@
 use Yii;
 use app\components\NrtLogger;
 
-\bedezign\yii2\audit\web\JSLoggingAsset::register($this);
+//\bedezign\yii2\audit\web\JSLoggingAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $model \app\models\DATA0331e68e23ca4e308b49869bffbe5c79 */
 $url = Yii::$app->params['Nixxis_Url'];
