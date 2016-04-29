@@ -22,8 +22,8 @@
         "kartik-v/yii2-widget-datepicker": "@dev",
         "kartik-v/yii2-widget-timepicker": "*",
         "nkovacs/yii2-datetimepicker": "*",
-        "omnilight/yii2-phonenumbers": "*",
-        "bedezign/yii2-audit": "^1.0"
+        "omnilight/yii2-phonenumbers": "*"
+
 
     },
     "require-dev": {
