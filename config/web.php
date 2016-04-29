@@ -88,7 +88,7 @@ $config = [
 //                ],
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['info', 'error', 'warning'],
+                    'levels' => [ 'error', 'warning'],
                     //'logVars' => ['_SESSION'],
                     'logVars' => [],
                     'exportInterval' => 1,
