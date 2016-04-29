@@ -52,7 +52,7 @@ return [
             'Version' => 1,
             'ControllerDirectory' => 'GP_Leads',
             'ControllerStart' => 'index',
-            'Activities' => ['d1340400746448499870ebd8ac46faff'],
+            'Activities' => ['d1340400746448499870ebd8ac46faff', '3039be8f58c94b4a93afcc338fdb1b42'],
         ],
         ['Name' => 'GREENPEACE PROSPECTION',
             'Commentaire' => '',
