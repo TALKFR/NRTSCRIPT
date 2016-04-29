@@ -92,7 +92,7 @@ class DefaultController extends Controller {
                     'model_qualifications' => $model_qualifications,
                     'NixxisQualifications' => $this->NixxisQualifications,
                     'Module' => $this->module,
-                    'Leads' => $dataProvider
+//                    'Leads' => $dataProvider
         ]);
     }
 
