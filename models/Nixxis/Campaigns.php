@@ -38,7 +38,7 @@ class Campaigns extends \app\models\Nixxis\Data {
      * @inheritdoc
      */
     public static function tableName() {
-        return 'Campaigns';
+        return 'admin.dbo.Campaigns';
     }
 
     /**
@@ -83,6 +83,10 @@ class Campaigns extends \app\models\Nixxis\Data {
             'ExportFields' => 'Export Fields',
             'TimeStamp' => 'Time Stamp',
         ];
+    }
+
+    public static function GetCampaignsList() {
+        return Campaigns::find()->all();
     }
 
 }

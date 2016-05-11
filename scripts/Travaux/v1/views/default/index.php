@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\components\QualificationsWidget2;
+use app\components\QualificationsWidget;
 use app\components\FormWidgets\QualificationsGroupWidget;
 use app\components\FormWidgets\TitleWidget;
 use app\components\FormWidgets\CheckBoxWidget;
@@ -97,8 +97,8 @@ $this->title = 'Nixxis Reporting & Tools';
                 <?= $form->field($model, 'COMMENTAIRE_APPEL')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>
             </div>
 
-            <?= QualificationsGroupWidget::widget(['type' => QualificationsWidget2::NEUTRES, 'datas' => $NixxisQualifications, 'model' => $model]) ?>
-            <?= QualificationsGroupWidget::widget(['type' => QualificationsWidget2::POSITIVES, 'datas' => $NixxisQualifications, 'model' => $model,]) ?>
+            <?= QualificationsGroupWidget::widget(['type' => QualificationsWidget::NEUTRES, 'datas' => $NixxisQualifications, 'model' => $model]) ?>
+            <?= QualificationsGroupWidget::widget(['type' => QualificationsWidget::POSITIVES, 'datas' => $NixxisQualifications, 'model' => $model,]) ?>
 
 
         </div>

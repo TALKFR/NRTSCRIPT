@@ -3,8 +3,6 @@
 namespace app\scripts\Travaux\v1\controllers;
 
 use Yii;
-use yii\web\Controller;
-use yii\data\ActiveDataProvider;
 use app\models\NixxisParameters;
 use app\models\NixxisQualifications;
 use app\components\NrtLogger;
@@ -13,8 +11,6 @@ use app\scripts\Travaux\v1\models\GenForm;
 use app\scripts\Travaux\v1\models\Leads;
 
 class DefaultController extends \app\controllers\ScriptController {
-
-    // private $NixxisQualifications = array();
 
     private function AffectScenario($NixxisQualificationId, &$model, &$model_qualifications) {
         /* @var $model \app\models\Campaigns\DATA76b3ff146f6c4802b727bb3042493043 */
@@ -38,7 +34,6 @@ class DefaultController extends \app\controllers\ScriptController {
         if (!$NixxisParameters instanceof NixxisParameters) {
             die('Session Error');
         }
-        $Script = Yii::$app->session->get('Script');
 
 
         $model = $this->findModel($NixxisParameters->diallerReference);
@@ -55,11 +50,10 @@ class DefaultController extends \app\controllers\ScriptController {
 
 
         $dataProvider = Leads::find()->where(['nixxisid' => $NixxisParameters->diallerReference])->all();
-        NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptIndex");
+        NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $this->module, (microtime(true) - $start), "ScriptIndex");
         return $this->render('index', [
                     'model' => $model,
                     'NixxisParameters' => $NixxisParameters,
-                    'Script' => $Script,
                     'model_qualifications' => $model_qualifications,
                     'NixxisQualifications' => $this->NixxisQualifications,
                     'Module' => $this->module,
@@ -70,7 +64,6 @@ class DefaultController extends \app\controllers\ScriptController {
     public function actionStep2($Internal__id__) {
         $start = microtime(true);
         $model = $this->findModel($Internal__id__);
-        $Script = Yii::$app->session->get('Script');
 
         $model_qualifications = new NixxisQualifications();
         $model_qualifications->load(Yii::$app->request->post());
@@ -102,7 +95,6 @@ class DefaultController extends \app\controllers\ScriptController {
                 return $this->render('index', [
                             'model' => $model,
                             'NixxisParameters' => $NixxisParameters,
-                            'Script' => $Script,
                             'model_qualifications' => $model_qualifications,
                             'NixxisQualifications' => $this->NixxisQualifications,
                             'Module' => $this->module,
@@ -121,7 +113,6 @@ class DefaultController extends \app\controllers\ScriptController {
                             'model' => $model,
                             'model_qualifications' => $model_qualifications,
                             'NixxisParameters' => $NixxisParameters,
-                            'Script' => $Script,
                             'NixxisQualifications' => $this->NixxisQualifications,
                             'Module' => $this->module,
                 ]);
@@ -129,7 +120,7 @@ class DefaultController extends \app\controllers\ScriptController {
 
             if ($model_qualifications->nextstep == '') {
                 if ($model_qualifications->load(Yii::$app->request->post()) && $model_qualifications->validate()) {
-                    NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptQualify");
+                    NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $this->module, (microtime(true) - $start), "ScriptQualify");
 
 
                     if ($model->scenario == 'FIN') {
@@ -140,7 +131,6 @@ class DefaultController extends \app\controllers\ScriptController {
                                         'model' => $model,
                                         'model_qualifications' => $model_qualifications,
                                         'NixxisParameters' => $NixxisParameters,
-                                        'Script' => $Script,
                                         'NixxisQualifications' => $this->NixxisQualifications,
                                         'Module' => $this->module,
                                         'Leads' => $dataProvider
@@ -149,18 +139,15 @@ class DefaultController extends \app\controllers\ScriptController {
                     }
 
 
-                    $url = Yii::$app->params['Nixxis_Url'];
-
-                    $NixxisDirectLink = new \app\scripts\Artisans\v1\models\NixxisDirectLink($url, $NixxisParameters->sessionid);
+                    $NixxisDirectLink = new \app\components\NixxisDirectLink(Yii::$app->params['Nixxis_Url'], $NixxisParameters->sessionid);
                     $NixxisDirectLink->setContactid($NixxisParameters->contactid);
                     $NixxisDirectLink->setContactlistid($NixxisParameters->diallerReference);
-
                     $NixxisDirectLink->setInternalId();
                     $NixxisDirectLink->setQualification($model_qualifications->qualificationId, $model_qualifications->getCallbackNixxisformat(), $model_qualifications->callbackPhone);
 
                     return $this->render('last', [
                                 'model' => $model,
-                                'Script' => $Script,
+                                'Module' => $this->module,
                                 'NixxisParameters' => $NixxisParameters,
                                 'NixxisQualifications' => $model_qualifications,
                                 'Module' => $this->module,
@@ -173,7 +160,6 @@ class DefaultController extends \app\controllers\ScriptController {
                     'model' => $model,
                     'model_qualifications' => $model_qualifications,
                     'NixxisParameters' => $NixxisParameters,
-                    'Script' => $Script,
                     'NixxisQualifications' => $this->NixxisQualifications,
                     'Module' => $this->module,
         ]);
@@ -182,7 +168,6 @@ class DefaultController extends \app\controllers\ScriptController {
     public function actionQualify($Internal__id__) {
         $start = microtime(true);
         $model = $this->findModel($Internal__id__);
-        $Script = Yii::$app->session->get('Script');
         $model_qualifications = new NixxisQualifications();
         $model_qualifications->load(Yii::$app->request->post());
 
@@ -192,43 +177,32 @@ class DefaultController extends \app\controllers\ScriptController {
         $this->AffectScenario($model_qualifications->qualificationId, $model, $model_qualifications);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($model_qualifications->load(Yii::$app->request->post()) && $model_qualifications->validate()) {
-                NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $Script, (microtime(true) - $start), "ScriptQualify");
+                NrtLogger::log($NixxisParameters->sessionid, $NixxisParameters, $this->module, (microtime(true) - $start), "ScriptQualify");
 
-                $url = Yii::$app->params['Nixxis_Url'];
-
-                $NixxisDirectLink = new \app\scripts\Artisans\v1\models\NixxisDirectLink($url, $NixxisParameters->sessionid);
+                $NixxisDirectLink = new \app\components\NixxisDirectLink(Yii::$app->params['Nixxis_Url'], $NixxisParameters->sessionid);
                 $NixxisDirectLink->setContactid($NixxisParameters->contactid);
                 $NixxisDirectLink->setContactlistid($NixxisParameters->diallerReference);
-
-                echo $NixxisDirectLink->setInternalId();
-                echo $NixxisDirectLink->setQualification($model_qualifications->qualificationId, $model_qualifications->getCallbackNixxisformat(), $model_qualifications->callbackPhone);
+                $NixxisDirectLink->setInternalId();
+                $NixxisDirectLink->setQualification($model_qualifications->qualificationId, $model_qualifications->getCallbackNixxisformat(), $model_qualifications->callbackPhone);
 
 
                 return $this->render('last', [
                             'model' => $model,
-                            'Script' => $Script,
+                            'Module' => $this->module,
                             'NixxisParameters' => $NixxisParameters,
                             'NixxisQualifications' => $model_qualifications,
                 ]);
             }
+        } else {
+
+            return $this->render(($model_qualifications->nextstep != '' ? $model_qualifications->nextstep : 'index'), [
+                        'model' => $model,
+                        'model_qualifications' => $model_qualifications,
+                        'NixxisParameters' => $NixxisParameters,
+                        'NixxisQualifications' => $this->NixxisQualifications,
+                        'Module' => $this->module,
+            ]);
         }
     }
 
-//    protected function findModel($Internal__id__) {
-//        $NixxisParameters = Yii::$app->session->get('NixxisParameters');
-//        // Compute the model class name with the CampaignId
-//        if (!$NixxisParameters instanceof NixxisParameters) {
-//            die('Session timeout');
-//        }
-//
-//
-//        $modelclass = str_replace("/", "\\", dirname(str_replace("\\", "/", __NAMESPACE__))) . '\models\DATA' . ucfirst($NixxisParameters->diallerCampaign);
-//        $model = $modelclass::findOne(['Internal__id__' => $Internal__id__]);
-//        // Check if $model instance of modelclass
-//        // ie check if we can found a contact with the Internal__Id__ provided        
-//        if (!$model instanceof $modelclass) {
-//            die('Contact not found');
-//        }
-//        return $model;
-//    }
 }

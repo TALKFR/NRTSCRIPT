@@ -106,6 +106,14 @@ return [
             'ControllerStart' => 'index',
             'Activities' => ['d58ec5029f90417390b1d98fe7797a3e', 'e3e8540621c9416f9f0762c5e30fe6a9'],
         ],
+        ['Name' => 'MUTUELLE ANIMAUX',
+            'Module' => 1,
+            'Commentaire' => '',
+            'Version' => 1,
+            'ControllerDirectory' => 'Animaux',
+            'ControllerStart' => 'index',
+            'Activities' => ['c9b52f5b64b0499eaa98234c6938db1e'],
+        ],
     ],
 ];
 

@@ -2,8 +2,6 @@
 
 namespace app\scripts;
 
-use Yii;
-
 class Scripts extends \yii\base\Module {
 
     public $controllerNamespace = 'app\scripts';
@@ -24,13 +22,22 @@ class Scripts extends \yii\base\Module {
         $array = array();
         $reflector = new \ReflectionClass(static::class);
         $directories = glob(dirname($reflector->getFileName()) . '/*', GLOB_ONLYDIR);
+
         foreach ($directories as $directory) {
             if (file_exists($directory . '/Module.php')) {
                 $classname = $reflector->getNamespaceName() . "\\" . basename($directory) . "\Module";
-                $array[] = [ 'Name' => $classname::getName()];
+                $array[] = [ 'Name' => $classname::getName(), 'Id' => $classname];
             }
         }
         return $array;
+    }
+
+    public static function GetVersionsList($script) {
+        $Versions = array();
+        if ($script) {
+            $Versions = $script::GetVersionsList();
+        }
+        return $Versions;
     }
 
 }

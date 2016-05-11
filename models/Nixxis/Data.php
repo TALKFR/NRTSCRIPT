@@ -11,10 +11,6 @@ class Data extends \yii\db\ActiveRecord {
         return array('Internal__id__');
     }
 
-//    public static function getDb() {
-//        return Yii::$app->dbv2;
-//    }
-
     public function GetSystemData() {
         $ClassSystemData = new SystemData();
         $reflector = new \ReflectionClass($this);
@@ -22,17 +18,20 @@ class Data extends \yii\db\ActiveRecord {
         $bddname = str_replace('_', '', $bddname);
         $bddname = 'Data_' . $bddname;
 
-
-
-
         $ClassSystemData::$system_tablename = $bddname . '.dbo.SystemData';
-//        $ClassSystemData::$system_tablename = 'dbo.SystemData';
-//
-//        $connection = Yii::$app->db;
-//        $command = $connection->createCommand('use Data_4307f92b371f4d918b0d30be75048ef4');
-//        $command->execute(); // execute the non-query SQL
 
         return $ClassSystemData::find()->where("Internal__id__ = '" . $this->Internal__id__ . "'")->one();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules() {
+        return [
+
+            [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
+            [['TEL1', 'TEL2', 'TEL3'], 'app\components\Validators\NixxisPhoneNumberValidator', 'format' => 'FR'],
+        ];
     }
 
     public static function getMonths() {

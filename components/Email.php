@@ -2,6 +2,8 @@
 
 namespace app\components;
 
+use Yii;
+
 class Email {
 
     private $recipient;
@@ -34,14 +36,15 @@ class Email {
                 ->send();
     }
 
-    public function Send($mail, $model) {
+    public function Send($mail, $model, $path) {
         $params = [
             'model' => $model
         ];
 
 
 
-        \Yii::$app->mail->compose($mail, $params)
+        Yii::$app->mail->setViewPath($path);
+        Yii::$app->mail->compose($mail, $params)
                 ->setFrom([$this->from_email => $this->from_name])
                 ->setTo($this->recipient)
                 ->setSubject($this->subject)

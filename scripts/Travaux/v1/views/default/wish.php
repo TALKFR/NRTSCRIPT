@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\components\QualificationsWidget2;
+use app\components\QualificationsWidget;
 use app\components\ErrorMessageWidget;
 use app\components\FormWidgets\ButtonWidget;
 use app\components\FormWidgets\LineWidget;

@@ -2,7 +2,7 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\components\QualificationsWidget2;
+use app\components\QualificationsWidget;
 use app\components\ErrorMessageWidget;
 
 /* @var $this yii\web\View */
@@ -58,18 +58,18 @@ $this->title = 'Nixxis Reporting & Tools';
             ?>
 
             <?php
-            echo QualificationsWidget2::widget(['type' => QualificationsWidget2::NEGATIVES, 'datas' => $NixxisQualifications, 'model' => $model]);
+            echo QualificationsWidget::widget(['type' => QualificationsWidget::NEGATIVES, 'datas' => $NixxisQualifications, 'model' => $model]);
             ?>
             <div class="row" style=" margin-left: 0px; margin-right: 0px;">
                 <?= $form->field($model, 'COMMENTAIRE_APPEL')->textarea(['rows' => 3, 'readonly' => $model->scenario == 'RO' ? true : false]) ?>
             </div>
-            <?= $model->scenario != 'RO' ? QualificationsWidget2::widget(['type' => QualificationsWidget2::NEUTRES, 'datas' => $NixxisQualifications, 'model' => $model]) : '' ?>
+            <?= $model->scenario != 'RO' ? QualificationsWidget::widget(['type' => QualificationsWidget::NEUTRES, 'datas' => $NixxisQualifications, 'model' => $model]) : '' ?>
 
             <?php
             $html = $form->field($model, '_ACTIVITE1')->dropDownList(ArrayHelper::map($model::GetFormulaireActivitités(), 'id', 'name'), ['prompt' => '--Select--'], ['class' => 'form-control inline-block updateindicator'])->label('Choix de l\'activité');
             ?>
 
-            <?= $model->scenario != 'RO' ? QualificationsWidget2::widget(['type' => QualificationsWidget2::POSITIVES, 'datas' => $NixxisQualifications, 'model' => $model, 'htmltoinsert' => $html]) : '' ?>
+            <?= $model->scenario != 'RO' ? QualificationsWidget::widget(['type' => QualificationsWidget::POSITIVES, 'datas' => $NixxisQualifications, 'model' => $model, 'htmltoinsert' => $html]) : '' ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>    

@@ -3,6 +3,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -26,7 +27,8 @@ AppAsset::register($this);
         <div class="wrap">
             <?php
             $menuItems[] = ['label' => 'Scripts', 'items' => [
-                    ['label' => 'Allocations', 'url' => ['/allocations/index']],
+                    ['label' => 'Allocations', 'url' => Url::toRoute('/ui/allocations/index')],
+                    ['label' => 'Scripts', 'url' => Url::toRoute('/ui/script/index')],
             ]];
 
             NavBar::begin([
@@ -58,7 +60,7 @@ AppAsset::register($this);
 
         <footer class="footer">
             <div class="container">
-                <p class="pull-left">&copy; ByPhone ltd <?= date('Y') ?></p>
+                <p class="pull-left">&copy; ByPhone Ltd <?= date('Y') ?></p>
 
                 <p class="pull-right"><?= Yii::powered() ?></p>
             </div>

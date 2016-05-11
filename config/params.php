@@ -10,5 +10,6 @@ return [
     'Nixxis_Bdd' => 'Nrt',
     'Nixxis_Url' => 'http://nixxisv2.talk.intra:8088/agent',
     'Nixxis_ContextDataUrl' => 'http://nixxisv2.talk.intra:8088/data/',
+    'ScriptPath' => 'scripts',
     'affects' => $affects,
 ];

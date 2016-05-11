@@ -3,7 +3,6 @@
 namespace app\models;
 
 use yii\base\Model;
-use app\components\NixxisPhoneNumberValidator;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,8 +33,8 @@ class NixxisQualifications extends Model {
             ['email', 'safe'],
 //            ['callbackPhone', 'safe'],
             [['callbackDate', 'callbackTime'], 'required', 'on' => 'CALLBACK', 'message' => 'Ce champs ne peut être vide'],
-            ['callbackPhone', 'app\components\NixxisPhoneNumberValidator', 'format' => 'FR'],
-            ['callbackTime', 'app\components\NixxisCallbackTimeValidator', 'Min' => '09:15', 'Max' => '19:45'],
+            ['callbackPhone', 'app\components\Validators\NixxisPhoneNumberValidator', 'format' => 'FR'],
+            ['callbackTime', 'app\components\Validators\NixxisCallbackTimeValidator', 'Min' => '09:15', 'Max' => '19:45'],
             [['email'], 'required', 'on' => 'ENVOIMAIL', 'message' => 'Ce champs ne peut être vide'],
         ];
     }

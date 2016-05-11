@@ -1,0 +1,17 @@
+<?php
+
+namespace app\scripts\<??= Name ??>;
+
+use Yii;
+
+class Module extends \app\scripts\Script {
+
+    public static function getRoute() {
+        return '/Scripts/<??= Name ??>';
+    }
+
+    public static function getName() {
+        return '<??= Description ??>';
+    }
+
+}

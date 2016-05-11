@@ -2,7 +2,7 @@
 
 namespace app\scripts\Artisans\v1\models;
 
-use app\components\EitherValidator;
+use app\components\Validators\EitherValidator;
 use Yii;
 
 //Id : cielsdirect

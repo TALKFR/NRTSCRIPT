@@ -18,6 +18,7 @@ echo "<?php\n";
 namespace <?= $generator->ns ?>;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
 * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
@@ -32,7 +33,7 @@ use Yii;
     <?php endforeach; ?>
 <?php endif; ?>
 */
-class <?= $className ?> extends \app\models\Nixxis\Data
+class <?= $className ?> extends custommodel
 {
 /**
 * @inheritdoc
@@ -57,7 +58,9 @@ return '<?= $generator->generateTableName($tableName) ?>';
 */
 public function rules()
 {
-return [<?= "\n            " . implode(",\n            ", $rules) . "\n        " ?>];
+$p_rules = parent::rules();
+$rules = [<?= "\n            " . implode(",\n            ", $rules) . "\n        " ?>];
+return ArrayHelper::merge($p_rules, $rules);
 }
 
 /**
