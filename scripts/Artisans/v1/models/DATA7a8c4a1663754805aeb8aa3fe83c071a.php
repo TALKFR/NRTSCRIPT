@@ -79,7 +79,7 @@ class DATA7a8c4a1663754805aeb8aa3fe83c071a extends custommodel {
         return [
             [['Internal__id__'], 'required'],
             [['EMAIL1', 'EMAIL2'], 'email', 'message' => 'La valeur doit être un email valide'],
-            [['TEL1', 'TEL2', 'TEL3'], 'app\components\NixxisPhoneNumberValidator', 'format' => 'FR'],
+            [['TEL1', 'TEL2', 'TEL3'], 'app\components\Validators\NixxisPhoneNumberValidator', 'format' => 'FR'],
             [['N_DATEPA_MONTH', 'N_DATEPA_YEAR', 'DATE_RAPPEL', 'HEURE_RAPPEL'], 'safe'],
             [['Internal__id__', 'CODE_MEDIA', 'IDENTIFIANT1', 'IDENTIFIANT2', 'RS1', 'RS2', 'CIV', 'NOM', 'PRENOM', 'NUMERO_DE_RUE', 'CODE_BIS', 'ADR1', 'ADR2', 'ADR3', 'ADR4', 'CP', 'VILLE', 'PAYS', 'TEL1', 'TEL2', 'TEL3', 'EMAIL1', 'EMAIL2', 'COMMENTAIRE_APPEL', 'FILTRE', 'PRIORITE', '_CORPS_DE_METIER', '_NOM_GERANT', '_DATE_CREATION', '_NB_SALARIE', '_DATE_RAPPEL', '_ACTIVITE1', '_ACTIVITE2', '_ACTIVITE3'], 'string'],
             [['MODIF_ADRESSE', 'MODIF_TEL', 'MODIF_EMAIL', '_DEJA_AFFILIE_123DEVIS', '_AFFILIE_INACTIF', '_CONTRAT_DECENNAL_EN_COURS', '_SOUHAITE_DEVIS_DECENNAL', '_FLOTTE_AUTOMOBILE', '_SITE_INTERNET', '_ALARME'], 'integer'],
